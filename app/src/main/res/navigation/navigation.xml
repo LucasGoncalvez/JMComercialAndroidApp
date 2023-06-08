@@ -36,7 +36,11 @@
         android:id="@+id/listaClientesView"
         android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.principal.ListaClientesView"
         android:label="fragment_lista_clientes_view"
-        tools:layout="@layout/fragment_lista_clientes_view" />
+        tools:layout="@layout/fragment_lista_clientes_view" >
+        <action
+            android:id="@+id/action_listaClientesView_to_ABMCliente"
+            app:destination="@id/ABMCliente" />
+    </fragment>
     <fragment
         android:id="@+id/listaInventarioView"
         android:name="com.example.jmcomercialapp.a_ui.modulos.inventario.principal.ListaInventarioView"
@@ -52,4 +56,9 @@
         android:name="com.example.jmcomercialapp.a_ui.modulos.ventaarticulos.principal.ListaVentaArticulosView"
         android:label="fragment_lista_venta_articulos_view"
         tools:layout="@layout/fragment_lista_venta_articulos_view" />
+    <fragment
+        android:id="@+id/ABMCliente"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.ABMCliente"
+        android:label="ABMCliente"
+        tools:layout="@layout/fragment_abm_cliente"/>
 </navigation>
