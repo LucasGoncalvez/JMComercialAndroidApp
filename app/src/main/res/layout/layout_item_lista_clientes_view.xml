@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounder_border"
+        android:padding="8dp"
+        android:layout_margin="4dp">
+
+        <TextView
+            android:id="@+id/tvNombreClienteItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Nombre" />
+
+        <TextView
+            android:id="@+id/tvApellidoClienteItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@+id/tvNombreClienteItem"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Apellido" />
+
+        <TextView
+            android:id="@+id/tvCiudadClienteItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreClienteItem"
+            tools:text="Ciudad" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

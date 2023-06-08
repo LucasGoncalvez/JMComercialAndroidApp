@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/inicioSesion">
+
+    <fragment
+        android:id="@+id/inicioSesion"
+        android:name="com.example.jmcomercialapp.a_ui.login.iniciosesion.principal.InicioSesion"
+        android:label="fragment_inicio_sesion"
+        tools:layout="@layout/fragment_inicio_sesion" >
+        <action
+            android:id="@+id/action_inicioSesion_to_menuPrincipal"
+            app:destination="@id/menuPrincipal" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuPrincipal"
+        android:name="com.example.jmcomercialapp.a_ui.menu.principal.MenuPrincipal"
+        android:label="fragment_menu_principal"
+        tools:layout="@layout/fragment_menu_principal" >
+        <action
+            android:id="@+id/action_menuPrincipal_to_listaClientesView"
+            app:destination="@id/listaClientesView" />
+        <action
+            android:id="@+id/action_menuPrincipal_to_listaPrestamosView"
+            app:destination="@id/listaPrestamosView" />
+        <action
+            android:id="@+id/action_menuPrincipal_to_listaInventarioView"
+            app:destination="@id/listaInventarioView" />
+        <action
+            android:id="@+id/action_menuPrincipal_to_listaVentaArticulosView"
+            app:destination="@id/listaVentaArticulosView" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaClientesView"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.principal.ListaClientesView"
+        android:label="fragment_lista_clientes_view"
+        tools:layout="@layout/fragment_lista_clientes_view" />
+    <fragment
+        android:id="@+id/listaInventarioView"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.inventario.principal.ListaInventarioView"
+        android:label="fragment_lista_inventario_view"
+        tools:layout="@layout/fragment_lista_inventario_view" />
+    <fragment
+        android:id="@+id/listaPrestamosView"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.prestamos.principal.ListaPrestamosView"
+        android:label="fragment_lista_prestamos_view"
+        tools:layout="@layout/fragment_lista_prestamos_view" />
+    <fragment
+        android:id="@+id/listaVentaArticulosView"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.ventaarticulos.principal.ListaVentaArticulosView"
+        android:label="fragment_lista_venta_articulos_view"
+        tools:layout="@layout/fragment_lista_venta_articulos_view" />
+</navigation>
