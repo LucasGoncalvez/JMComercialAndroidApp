@@ -1,4 +1,4 @@
-package com.example.jmcomercialapp.a_ui.modulos.clientes.principal
+package com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases
 
 //Objeto para el item del RecyclerView de la lista principal de clientes
 data class ClienteItem(

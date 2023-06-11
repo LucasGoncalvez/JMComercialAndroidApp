@@ -1,4 +1,4 @@
-package com.example.jmcomercialapp.a_ui.modulos.clientes.principal
+package com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases
 
 import android.view.LayoutInflater
 import android.view.View

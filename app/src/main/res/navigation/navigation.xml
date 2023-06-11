@@ -41,8 +41,8 @@
             android:id="@+id/action_listaClientesView_to_ABMCliente"
             app:destination="@id/ABMCliente" />
         <action
-            android:id="@+id/action_listaClientesView_to_fragmentClienteDetalle"
-            app:destination="@id/fragmentClienteDetalle" />
+            android:id="@+id/action_listaClientesView_to_fragmentContainerCliente"
+            app:destination="@id/fragmentContainerCliente" />
     </fragment>
     <fragment
         android:id="@+id/listaInventarioView"
@@ -65,12 +65,12 @@
         android:label="ABMCliente"
         tools:layout="@layout/fragment_abm_cliente"/>
     <fragment
-        android:id="@+id/fragmentClienteDetalle"
-        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentClienteDetalle"
-        android:label="FragmentClienteDetalle"
-        tools:layout="@layout/fragment_cliente_detalle">
+        android:id="@+id/fragmentContainerCliente"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentContainerCliente"
+        android:label="fragment_container_cliente"
+        tools:layout="@layout/fragment_container_cliente" >
         <action
-            android:id="@+id/action_fragmentClienteDetalle_to_ABMCliente"
+            android:id="@+id/action_fragmentContainerCliente_to_ABMCliente"
             app:destination="@id/ABMCliente" />
     </fragment>
 </navigation>

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
+import com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases.ListaClientesAdapter
+import com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases.ListaClientesDataSource
 import com.example.jmcomercialapp.databinding.FragmentListaClientesViewBinding
 
 class ListaClientesView : Fragment() {
@@ -26,6 +28,10 @@ class ListaClientesView : Fragment() {
 
     fun goToRegistrarCliente(){
         findNavController().navigate(R.id.action_listaClientesView_to_ABMCliente)
+    }
+
+    fun goToClienteDetalle(){
+        findNavController().navigate(R.id.action_listaClientesView_to_fragmentContainerCliente)
     }
 
     private fun showToast(msg: String){
