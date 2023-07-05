@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.clases.TabPageAdapterCliente
@@ -20,6 +21,7 @@ class FragmentContainerCliente : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
         binding = FragmentContainerClienteBinding.inflate(inflater, container, false)
         val tabCount = binding.tabLayoutCliente.tabCount
         viewPagerAdapter = TabPageAdapterCliente(this@FragmentContainerCliente, tabCount)

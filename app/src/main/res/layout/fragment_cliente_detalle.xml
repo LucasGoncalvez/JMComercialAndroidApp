@@ -101,12 +101,21 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvTelefonoCliente"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         tools:text="Teléfono" />
+
+                    <!-- Boton de icono de whatsapp para enviar un mensaje por whatsapp al cliente -->
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="4dp"
+                        android:text="whatsapp"/>
 
                 </LinearLayout>
 
@@ -130,8 +139,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         tools:text="Correo" />
+
+                    <!-- Boton de icono de correo para enviar un mensaje por correo al cliente -->
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="4dp"
+                        android:text="gmail"/>
 
                 </LinearLayout>
 

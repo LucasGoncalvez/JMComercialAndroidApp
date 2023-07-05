@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
 
@@ -23,8 +24,14 @@ class ABMCliente : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
         binding = FragmentAbmClienteBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //(activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
     }
 
     fun btnCiudadAction(){
