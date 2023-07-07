@@ -31,13 +31,15 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentClienteDetalleBinding.inflate(inflater, container, false)
+        binding.clientedetalle = this@FragmentClienteDetalle
         binding.lifecycleOwner = viewLifecycleOwner
+        viewModel.getClienteDetail(clienteId)
         Log.d("Main", "Id del cliente en onCreateView(): ${viewModel._idClienteActual.value}")
         return binding.root
     }
 
     fun modificarCliente(){
-        Log.d("Main", "Modificar cliente") //No se está ejecutando esta acción
+        Log.d("Main", viewModel.cliente.value?:"Nulo") //No se está ejecutando esta acción
         //findNavController().navigate(R.id.action_fragmentContainerCliente_to_ABMCliente)
     }
 

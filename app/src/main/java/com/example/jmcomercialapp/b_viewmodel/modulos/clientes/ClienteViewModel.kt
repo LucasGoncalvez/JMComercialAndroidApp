@@ -21,6 +21,10 @@ class ClienteViewModel: ViewModel() {
 
     val _idClienteActual = MutableLiveData<Int?>(null)  //Acá se aloja el id del cliente que se seleccionará en el RecyclerView de Clientes
 
+    private val _cliente = MutableLiveData<String>()
+    val cliente: LiveData<String>
+        get() = _cliente
+
     fun getClientesPreview(){
         viewModelScope.launch {
             _status.value = MainStatuses.LOADING
@@ -32,6 +36,21 @@ class ClienteViewModel: ViewModel() {
             }
             catch (e: Exception){
                 _listaClientes.value = mutableListOf()
+                _status.value = MainStatuses.ERROR
+            }
+        }
+    }
+
+    fun getClienteDetail(id: Int){
+        viewModelScope.launch {
+            _status.value = MainStatuses.LOADING
+            try{
+                val result = ClienteApi.retrofitServiceAux.getClienteDetail(id)
+                _cliente.value = result
+                _status.value = MainStatuses.DONE
+            }
+            catch (e: Exception){
+                _cliente.value = e.message
                 _status.value = MainStatuses.ERROR
             }
         }
