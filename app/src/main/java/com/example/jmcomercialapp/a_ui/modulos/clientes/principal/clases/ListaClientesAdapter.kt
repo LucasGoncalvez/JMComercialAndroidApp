@@ -12,6 +12,7 @@ import com.example.jmcomercialapp.databinding.LayoutItemListaClientesViewBinding
 class ListaClientesAdapter():
     ListAdapter<ClientePreviewData, ListaClientesAdapter.ListaClientesViewHolder>(DiffCallback){
 
+    var onItemClick: ((ClientePreviewData) -> Unit)? = null
     class ListaClientesViewHolder(private var binding: LayoutItemListaClientesViewBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cliente: ClientePreviewData){
@@ -37,6 +38,9 @@ class ListaClientesAdapter():
     ) {
         val cliente = getItem(position)
         holder.bind(cliente)
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(cliente)
+        }
     }
 
     companion object DiffCallback: DiffUtil.ItemCallback<ClientePreviewData>(){

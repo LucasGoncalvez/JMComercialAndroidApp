@@ -1,6 +1,7 @@
 package com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,12 @@ class FragmentContainerCliente : Fragment() {
 
     private lateinit var binding: FragmentContainerClienteBinding
     private lateinit var viewPagerAdapter: TabPageAdapterCliente
+    private var clienteId: Int = 0
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        clienteId = requireArguments().getInt("clienteId")
+        Log.d("Main", "clienteId en container: $clienteId")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +31,7 @@ class FragmentContainerCliente : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
         binding = FragmentContainerClienteBinding.inflate(inflater, container, false)
         val tabCount = binding.tabLayoutCliente.tabCount
-        viewPagerAdapter = TabPageAdapterCliente(this@FragmentContainerCliente, tabCount)
+        viewPagerAdapter = TabPageAdapterCliente(this@FragmentContainerCliente, tabCount, clienteId)
         binding.viewPagerCliente.adapter = viewPagerAdapter
         binding.viewPagerCliente.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback(){
@@ -51,5 +58,7 @@ class FragmentContainerCliente : Fragment() {
         )
         return binding.root
     }
+
+
 
 }

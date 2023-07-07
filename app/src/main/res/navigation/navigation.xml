@@ -72,5 +72,8 @@
         <action
             android:id="@+id/action_fragmentContainerCliente_to_ABMCliente"
             app:destination="@id/ABMCliente" />
+        <argument
+            android:name="clienteId"
+            app:argType="integer" />
     </fragment>
 </navigation>

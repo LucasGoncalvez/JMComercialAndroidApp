@@ -6,5 +6,8 @@
     <string name="lista_clientes_fragment">Clientes</string>
 
     <string name="content_descripcion">ContentDescripcion</string>
+    <string name="title_lista_clientes_main">Clientes registrados</string>
+    <string name="textErrorConection">Verifique su conexión de red</string>
+    <string name="textLoading">Cargando...</string>
 
 </resources>

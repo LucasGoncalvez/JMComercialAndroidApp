@@ -5,7 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentClienteDetalle
 import com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentClienteHistorialTarjetas
 
-class TabPageAdapterCliente(fragmentContainer: Fragment, private val tabCount: Int):
+class TabPageAdapterCliente(fragmentContainer: Fragment, private val tabCount: Int, private val clienteId: Int):
     FragmentStateAdapter(fragmentContainer){
     override fun getItemCount(): Int {
         return tabCount
@@ -13,7 +13,7 @@ class TabPageAdapterCliente(fragmentContainer: Fragment, private val tabCount: I
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0 -> FragmentClienteDetalle()
+            0 -> FragmentClienteDetalle(clienteId)
             else -> FragmentClienteHistorialTarjetas()
         }
     }

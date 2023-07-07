@@ -22,7 +22,7 @@
             android:id="@+id/tvTitleListaClientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clientes registrados"
+            android:text="@string/title_lista_clientes_main"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -34,14 +34,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
-            app:listDataClientesPreview="@{viewModel.listaClientes}"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleListaClientes"
+            app:listDataClientesPreview="@{viewModel.listaClientes}"
             app:spanCount="1"
-            android:clipToPadding="false"
             tools:listitem="@layout/layout_item_lista_clientes_view" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -63,9 +63,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Prueba"
-            android:onClick="@{() -> listaclientesview.goToClienteDetalle()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/imgMessage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="@string/content_descripcion"
+            app:imgStatus="@{viewModel.status}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_loop="true"
+            tools:srcCompat="@drawable/wifi_off" />
+
+        <TextView
+            android:id="@+id/textMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgMessage"
+            app:textStatus="@{viewModel.status}"
+            tools:text="Mensaje de error" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
