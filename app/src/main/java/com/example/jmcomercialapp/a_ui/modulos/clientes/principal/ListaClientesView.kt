@@ -29,7 +29,8 @@ class ListaClientesView : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.getClientesPreview()
         binding.listaclientesview = this@ListaClientesView
-        binding.rvListaClientes.adapter = ListaClientesAdapter(ListaClientesDataSource().loadData())
+        binding.viewModel = viewModel
+        binding.rvListaClientes.adapter = ListaClientesAdapter()
         return binding.root
     }
 

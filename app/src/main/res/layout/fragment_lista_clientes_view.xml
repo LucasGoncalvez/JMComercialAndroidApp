@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel" />
+        <variable
             name="listaclientesview"
             type="com.example.jmcomercialapp.a_ui.modulos.clientes.principal.ListaClientesView" />
     </data>
@@ -31,12 +34,14 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="15dp"
+            app:listDataClientesPreview="@{viewModel.listaClientes}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleListaClientes"
             app:spanCount="1"
+            android:clipToPadding="false"
             tools:listitem="@layout/layout_item_lista_clientes_view" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -1,19 +1,23 @@
 package com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jmcomercialapp.R
+import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClientePreviewData
+import com.example.jmcomercialapp.databinding.LayoutItemListaClientesViewBinding
+//import androidx.recyclerview.widget
 
-class ListaClientesAdapter(private val listData: List<ClienteItem>):
-    RecyclerView.Adapter<ListaClientesAdapter.ListaClientesViewHolder>(){
+class ListaClientesAdapter():
+    ListAdapter<ClientePreviewData, ListaClientesAdapter.ListaClientesViewHolder>(DiffCallback){
 
-    class ListaClientesViewHolder(item: View): RecyclerView.ViewHolder(item) {
-        val nombre = item.findViewById<TextView>(R.id.tvNombreClienteItem)
-        val apellido = item.findViewById<TextView>(R.id.tvApellidoClienteItem)
-        val ciudad = item.findViewById<TextView>(R.id.tvCiudadClienteItem)
+    class ListaClientesViewHolder(private var binding: LayoutItemListaClientesViewBinding):
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(cliente: ClientePreviewData){
+            binding.cliente = cliente
+            binding.executePendingBindings()
+        }
     }
 
     override fun onCreateViewHolder(
@@ -21,8 +25,8 @@ class ListaClientesAdapter(private val listData: List<ClienteItem>):
         viewType: Int
     ): ListaClientesViewHolder {
         return ListaClientesViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.layout_item_lista_clientes_view, parent, false
+            LayoutItemListaClientesViewBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }
@@ -31,16 +35,28 @@ class ListaClientesAdapter(private val listData: List<ClienteItem>):
         holder: ListaClientesViewHolder,
         position: Int
     ) {
-        val item = listData[position]
-        holder.apply {
-            nombre.text = item.nombre
-            apellido.text = item.apellido
-            ciudad.text = item.ciudad
-        }
+        val cliente = getItem(position)
+        holder.bind(cliente)
     }
 
-    override fun getItemCount(): Int {
-        return listData.size
+    companion object DiffCallback: DiffUtil.ItemCallback<ClientePreviewData>(){
+        override fun areItemsTheSame(
+            oldItem: ClientePreviewData,
+            newItem: ClientePreviewData
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: ClientePreviewData,
+            newItem: ClientePreviewData
+        ): Boolean {
+            return oldItem.nombre == newItem.nombre
+                    && oldItem.apellido == newItem.apellido
+                    && oldItem.tipoDocumento == newItem.tipoDocumento
+                    && oldItem.numeroDocumento == newItem.numeroDocumento
+        }
+
     }
 
 }
