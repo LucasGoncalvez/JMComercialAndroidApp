@@ -1,4 +1,4 @@
-package com.example.jmcomercialapp.c_data.modulos.clientes.network
+package com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente
 
 import com.squareup.moshi.Json
 

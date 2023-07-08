@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClientePreviewData
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClientePreviewData
 import com.example.jmcomercialapp.databinding.LayoutItemListaClientesViewBinding
 //import androidx.recyclerview.widget
 

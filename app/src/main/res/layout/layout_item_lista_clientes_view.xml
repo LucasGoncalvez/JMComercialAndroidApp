@@ -6,7 +6,7 @@
     <data>
         <variable
             name="cliente"
-            type="com.example.jmcomercialapp.c_data.modulos.clientes.network.ClientePreviewData" />
+            type="com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClientePreviewData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

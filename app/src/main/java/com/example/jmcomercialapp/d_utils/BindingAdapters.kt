@@ -1,8 +1,6 @@
 package com.example.jmcomercialapp.d_utils
 
-import android.provider.Settings.Global.getString
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.airbnb.lottie.LottieAnimationView

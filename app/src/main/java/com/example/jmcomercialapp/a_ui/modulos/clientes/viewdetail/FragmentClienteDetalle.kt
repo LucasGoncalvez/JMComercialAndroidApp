@@ -25,6 +25,7 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
         viewModel._idClienteActual.value = clienteId
         Log.d("Main", "Id del cliente en onCreate(): ${viewModel._idClienteActual.value}")
         viewModel.getClienteDetail(clienteId)
+        viewModel.getClienteContactos(clienteId)
     }
 
     override fun onCreateView(
@@ -40,7 +41,8 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
     }
 
     fun modificarCliente(){
-        findNavController().navigate(R.id.action_fragmentContainerCliente_to_ABMCliente)
+        Log.d("Main", "${viewModel.listaContactos.value?.size}")
+        //findNavController().navigate(R.id.action_fragmentContainerCliente_to_ABMCliente)
     }
 
 }

@@ -1,5 +1,8 @@
 package com.example.jmcomercialapp.c_data.modulos.clientes.network
 
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClienteDetail
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClientePreviewData
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.clientecontacto.ClienteContactoDetail
 import com.example.jmcomercialapp.d_utils.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -30,6 +33,9 @@ interface ClienteApiService{
 
     @GET("api/Persona/Get?")
     suspend fun getClienteDetail(@Query("id") id: Int): ClienteDetail
+
+    @GET("api/Persona/GetContacts?")
+    suspend fun getClienteContactos(@Query("personaId") id: Int): MutableList<ClienteContactoDetail>
 }
 
 object ClienteApi{
