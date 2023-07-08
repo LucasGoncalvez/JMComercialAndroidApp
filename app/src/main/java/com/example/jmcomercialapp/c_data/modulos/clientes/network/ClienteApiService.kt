@@ -9,7 +9,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//import retrofit2.converter.moshi.MoshiConverterFactory
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -30,7 +29,7 @@ interface ClienteApiService{
     suspend fun getClientesPreview(): MutableList<ClientePreviewData>
 
     @GET("api/Persona/Get?")
-    suspend fun getClienteDetail(@Query("id") id: Int): String
+    suspend fun getClienteDetail(@Query("id") id: Int): ClienteDetail
 }
 
 object ClienteApi{

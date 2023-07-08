@@ -1,10 +1,12 @@
 package com.example.jmcomercialapp.b_viewmodel.modulos.clientes
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClienteApi
+import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClienteDetail
 import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClientePreviewData
 import com.example.jmcomercialapp.d_utils.MainStatuses
 import kotlinx.coroutines.launch
@@ -21,8 +23,8 @@ class ClienteViewModel: ViewModel() {
 
     val _idClienteActual = MutableLiveData<Int?>(null)  //Acá se aloja el id del cliente que se seleccionará en el RecyclerView de Clientes
 
-    private val _cliente = MutableLiveData<String>()
-    val cliente: LiveData<String>
+    private val _cliente = MutableLiveData<ClienteDetail?>()
+    val cliente: LiveData<ClienteDetail?>
         get() = _cliente
 
     fun getClientesPreview(){
@@ -45,12 +47,13 @@ class ClienteViewModel: ViewModel() {
         viewModelScope.launch {
             _status.value = MainStatuses.LOADING
             try{
-                val result = ClienteApi.retrofitServiceAux.getClienteDetail(id)
+                val result = ClienteApi.retrofitService.getClienteDetail(id)
                 _cliente.value = result
                 _status.value = MainStatuses.DONE
             }
             catch (e: Exception){
-                _cliente.value = e.message
+                _cliente.value = null
+                Log.d("Main", e.message.toString())
                 _status.value = MainStatuses.ERROR
             }
         }

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Información del cliente"
+            android:text="@string/title_detalle_cliente"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:textStyle="bold"
-                        android:text="Nombre:" />
+                        android:text="@string/caption_name" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewName"
@@ -72,7 +72,7 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:textStyle="bold"
-                        android:text="Apellido:" />
+                        android:text="@string/caption_last_name" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewLastName"
@@ -97,7 +97,7 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="Teléfono:" />
+                        android:text="@string/caption_phone" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvTelefonoCliente"
@@ -131,11 +131,11 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="Correo:" />
+                        android:text="@string/caption_email" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvEmailCliente"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
@@ -165,7 +165,7 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="Ciudad:" />
+                        android:text="@string/caption_city" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvCiudadCliente"
@@ -190,7 +190,7 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="Geolocalización:" />
+                        android:text="@string/caption_geolocation" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvGeolocationCliente"
@@ -215,7 +215,7 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="Dirección:" />
+                        android:text="@string/caption_address" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvDireccionCliente"
