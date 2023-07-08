@@ -42,3 +42,21 @@ fun bindTextStatus(textView: TextView, status: MainStatuses?){
         }
     }
 }
+
+@BindingAdapter("viewVisibility")
+fun bindViewVisibility(view: View, status: MainStatuses?){
+    when(status){
+        MainStatuses.LOADING -> {
+            view.visibility = View.GONE
+        }
+        MainStatuses.ERROR -> {
+            view.visibility = View.GONE
+        }
+        MainStatuses.DONE -> {
+            view.visibility = View.VISIBLE
+        }
+        else -> {
+            view.visibility = View.GONE
+        }
+    }
+}

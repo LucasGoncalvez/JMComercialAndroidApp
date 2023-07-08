@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel" />
+        <variable
             name="clientedetalle"
             type="com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentClienteDetalle" />
     </data>
@@ -37,6 +40,14 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/imgMessageClienteDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    app:imgStatus="@{viewModel.status}"
+                    app:lottie_loop="true"
+                    tools:srcCompat="@drawable/wifi_off" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,15 +59,18 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:textStyle="bold"
-                        android:text="@string/caption_name" />
+                        android:text="@string/caption_name"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
+                        android:text="@{viewModel.cliente.nombre}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        tools:text="Nombre" />
+                        tools:text="Nombre"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                 </LinearLayout>
 
@@ -72,7 +86,8 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         android:textStyle="bold"
-                        android:text="@string/caption_last_name" />
+                        android:text="@string/caption_last_name"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewLastName"
@@ -80,10 +95,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
+                        android:text="@{viewModel.cliente.apellido}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        tools:text="Apellido" />
+                        tools:text="Apellido"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,75 +124,8 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="@string/caption_phone" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvTelefonoCliente"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        tools:text="Teléfono" />
-
-                    <!-- Boton de icono de whatsapp para enviar un mensaje por whatsapp al cliente -->
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:text="whatsapp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        android:textStyle="bold"
-                        android:text="@string/caption_email" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvEmailCliente"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="1"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        tools:text="Correo" />
-
-                    <!-- Boton de icono de correo para enviar un mensaje por correo al cliente -->
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:text="gmail"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="4dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        android:textStyle="bold"
-                        android:text="@string/caption_city" />
+                        android:text="@string/caption_city"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvCiudadCliente"
@@ -173,8 +133,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
+                        android:text="@{viewModel.cliente.ciudad}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        tools:text="Ciudad" />
+                        tools:text="Ciudad"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                 </LinearLayout>
 
@@ -190,7 +152,8 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="@string/caption_geolocation" />
+                        android:text="@string/caption_geolocation"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvGeolocationCliente"
@@ -199,7 +162,9 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        tools:text="Geolocalización" />
+                        android:text="@{viewModel.cliente.geolocalizacion}"
+                        tools:text="Geolocalización"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                 </LinearLayout>
 
@@ -215,7 +180,8 @@
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         android:textStyle="bold"
-                        android:text="@string/caption_address" />
+                        android:text="@string/caption_address"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tvDireccionCliente"
@@ -224,7 +190,9 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="4dp"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                        tools:text="Dirección" />
+                        android:text="@{viewModel.cliente.direccion}"
+                        tools:text="Dirección"
+                        app:viewVisibility="@{viewModel.status}"/>
 
                 </LinearLayout>
 
@@ -253,7 +221,8 @@
                 android:layout_marginEnd="24dp"
                 android:contentDescription="@string/content_descripcion"
                 android:onClick="@{() -> clientedetalle.modificarCliente()}"
-                app:srcCompat="@drawable/edit_24px" />
+                app:srcCompat="@drawable/edit_24px"
+                app:viewVisibility="@{viewModel.status}"/>
 
         </LinearLayout>
 

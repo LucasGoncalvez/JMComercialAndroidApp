@@ -24,6 +24,7 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel._idClienteActual.value = clienteId
         Log.d("Main", "Id del cliente en onCreate(): ${viewModel._idClienteActual.value}")
+        viewModel.getClienteDetail(clienteId)
     }
 
     override fun onCreateView(
@@ -32,15 +33,14 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
     ): View? {
         binding = FragmentClienteDetalleBinding.inflate(inflater, container, false)
         binding.clientedetalle = this@FragmentClienteDetalle
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel.getClienteDetail(clienteId)
         Log.d("Main", "Id del cliente en onCreateView(): ${viewModel._idClienteActual.value}")
         return binding.root
     }
 
     fun modificarCliente(){
-        Log.d("Main", viewModel.cliente.value?:"Nulo") //No se está ejecutando esta acción
-        //findNavController().navigate(R.id.action_fragmentContainerCliente_to_ABMCliente)
+        findNavController().navigate(R.id.action_fragmentContainerCliente_to_ABMCliente)
     }
 
 }

@@ -42,6 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitleListaClientes"
             app:listDataClientesPreview="@{viewModel.listaClientes}"
             app:spanCount="1"
+            app:viewVisibility="@{viewModel.status}"
             tools:listitem="@layout/layout_item_lista_clientes_view" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,14 +58,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_add"
             android:focusable="true" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prueba"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/imgMessage"
