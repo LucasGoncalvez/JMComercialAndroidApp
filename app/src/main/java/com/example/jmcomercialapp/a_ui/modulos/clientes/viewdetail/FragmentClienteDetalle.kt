@@ -6,12 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.jmcomercialapp.R
+import com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.clases.ClienteContactoAdapter
 import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.databinding.FragmentClienteDetalleBinding
 
@@ -31,11 +27,12 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentClienteDetalleBinding.inflate(inflater, container, false)
         binding.clientedetalle = this@FragmentClienteDetalle
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.rvListaContactos.adapter = ClienteContactoAdapter()
         Log.d("Main", "Id del cliente en onCreateView(): ${viewModel._idClienteActual.value}")
         return binding.root
     }

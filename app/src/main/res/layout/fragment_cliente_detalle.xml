@@ -197,8 +197,17 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvListaContactos"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:listDataClienteContactoPreview="@{viewModel.listaContactos}"
+                    android:clipToPadding="false"
+                    app:spanCount="1"
+                    tools:itemCount="16"
+                    tools:listitem="@layout/layout_item_contacto" />
 
             </LinearLayout>
 
