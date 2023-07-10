@@ -8,7 +8,7 @@
     <string name="content_descripcion">ContentDescripcion</string>
     <string name="title_lista_clientes_main">Clientes registrados</string>
     <string name="textErrorConection">Verifique su conexión de red</string>
-    <string name="textLoading">Cargando...</string>
+    <string name="textLoading">Cargando…</string>
     <string name="title_detalle_cliente">Información del cliente</string>
     <string name="caption_name">Nombre:</string>
     <string name="caption_last_name">Apellido:</string>
@@ -17,5 +17,7 @@
     <string name="caption_city">Ciudad:</string>
     <string name="caption_geolocation">Geolocalización:</string>
     <string name="caption_address">Dirección:</string>
+    <string name="btn_registrar">Registrar</string>
+    <string name="btn_cancelar">Cancelar</string>
 
 </resources>
