@@ -21,5 +21,13 @@
     <string name="welcome_app">Bienvenido a \nJM Comercial App</string>
     <string name="login_title">Inicio de sesión</string>
     <string name="btn_forgot_password">Olvide mi contraseña</string>
+    <string name="hint_user">Usuario</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="subtitle_login">Iniciar sesión</string>
+    <string name="dont_have_account">No tienes una cuenta?</string>
+    <string name="caption_create_account">Crear cuenta</string>
+    <string name="caption_google">Google</string>
+    <string name="caption_twitter">Twitter</string>
+    <string name="caption_facebook">Facebook</string>
 
 </resources>

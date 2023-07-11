@@ -18,8 +18,8 @@ class InicioSesion : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
+    ): View {
+        (activity as AppCompatActivity).supportActionBar?.title = ""
         binding = FragmentInicioSesionBinding.inflate(inflater, container, false)
         binding.iniciosesion = this@InicioSesion
         return binding.root
