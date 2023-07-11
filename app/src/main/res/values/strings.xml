@@ -12,12 +12,14 @@
     <string name="title_detalle_cliente">Información del cliente</string>
     <string name="caption_name">Nombre:</string>
     <string name="caption_last_name">Apellido:</string>
-    <string name="caption_phone">Teléfono:</string>
-    <string name="caption_email">Correo:</string>
     <string name="caption_city">Ciudad:</string>
     <string name="caption_geolocation">Geolocalización:</string>
     <string name="caption_address">Dirección:</string>
     <string name="btn_registrar">Registrar</string>
     <string name="btn_cancelar">Cancelar</string>
+    <string name="title_abm_cliente">Registrar nuevo cliente</string>
+    <string name="welcome_app">Bienvenido a \nJM Comercial App</string>
+    <string name="login_title">Inicio de sesión</string>
+    <string name="btn_forgot_password">Olvide mi contraseña</string>
 
 </resources>

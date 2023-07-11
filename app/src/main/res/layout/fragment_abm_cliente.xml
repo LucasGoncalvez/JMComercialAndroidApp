@@ -17,7 +17,7 @@
             android:id="@+id/tvTitleRegisterCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registrar nuevo cliente"
+            android:text="@string/title_abm_cliente"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -155,18 +155,16 @@
 
                         </LinearLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <EditText
+                            android:id="@+id/editTextTextMultiLine"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/editTextAddress"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Ingrese su dirección"
-                                android:inputType="textPostalAddress" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            android:ems="10"
+                            android:gravity="start|top"
+                            android:inputType="textMultiLine"
+                            android:layout_marginTop="16dp"
+                            android:maxLines="10"
+                            android:hint="Dirección"/>
 
                     </LinearLayout>
 
