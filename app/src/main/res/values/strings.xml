@@ -29,5 +29,6 @@
     <string name="caption_google">Google</string>
     <string name="caption_twitter">Twitter</string>
     <string name="caption_facebook">Facebook</string>
+    <string name="title_menu_principal">Menú Principal</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.jmcomercialapp.d_utils
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.airbnb.lottie.LottieAnimationView
@@ -57,4 +58,9 @@ fun bindViewVisibility(view: View, status: MainStatuses?){
             view.visibility = View.GONE
         }
     }
+}
+
+@BindingAdapter("setImageFromId")
+fun bindSetImageFromId(imageView: ImageView, imageId: Int){
+    imageView.setImageResource(imageId)
 }

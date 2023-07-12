@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.example.jmcomercialapp.b_viewmodel.menu.MenuViewModel" />
+        <variable
             name="menu"
             type="com.example.jmcomercialapp.a_ui.menu.principal.MenuPrincipal" />
     </data>
@@ -12,64 +15,47 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".a_ui.menu.principal.MenuPrincipal">
+        tools:context=".a_ui.menu.principal.MenuPrincipal"
+        android:layout_margin="16dp">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menú Principal"
+            android:text="@string/title_menu_principal"
+            style="@style/big_title_main"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.114" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
-            android:text="Ventas Articulos"
-            android:onClick="@{() -> menu.goToVentasArticulos()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Prestamos"
-            android:onClick="@{() -> menu.goToPrestamos()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Inventario"
-            android:onClick="@{() -> menu.goToInventario()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button2" />
-
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--
         <Button
             android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Clientes"
             android:onClick="@{() -> menu.gotToClientes()}"
+            android:text="Clientes"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
+            android:layout_marginBottom="8dp"/>
+        -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMenuPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:clipToPadding="false"
+            app:listDataMenuPrincipal="@{viewModel.listItems}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/layout_item_menu_principal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

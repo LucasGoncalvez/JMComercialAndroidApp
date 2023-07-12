@@ -1,6 +1,7 @@
 package com.example.jmcomercialapp.a_ui.menu.principal
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,13 +22,15 @@ class MenuPrincipal : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
+    ): View {
+        (activity as AppCompatActivity).supportActionBar?.title = ""
         binding = FragmentMenuPrincipalBinding.inflate(inflater, container, false)
         binding.menu = this@MenuPrincipal
+        binding.viewModel = viewModel
+        binding.recyclerViewMenuPrincipal.adapter = MenuPrincipalAdapter()
         return binding.root
     }
-
+    
     fun goToVentasArticulos(){
         findNavController().navigate(R.id.action_menuPrincipal_to_listaVentaArticulosView)
     }
@@ -41,6 +44,7 @@ class MenuPrincipal : Fragment() {
     }
 
     fun gotToClientes(){
+        Log.d("Main", "Ir a Clientes")
         findNavController().navigate(R.id.action_menuPrincipal_to_listaClientesView)
     }
 
