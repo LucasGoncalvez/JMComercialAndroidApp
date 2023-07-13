@@ -11,10 +11,15 @@ import com.example.jmcomercialapp.databinding.LayoutItemMenuPrincipalBinding
 class MenuPrincipalAdapter:
     ListAdapter<MenuPrincipalItem, MenuPrincipalAdapter.MenuPrincipalViewHolder>(DiffCallback) {
 
+    var onItemClick: ((MenuPrincipalItem) -> Unit)? = null
+
     inner class MenuPrincipalViewHolder(private val binding: LayoutItemMenuPrincipalBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MenuPrincipalItem){
             binding.item = item
+            binding.carViewMenu.setOnClickListener{
+                onItemClick?.invoke(item)
+            }
             binding.executePendingBindings()
         }
     }
@@ -36,6 +41,9 @@ class MenuPrincipalAdapter:
     ) {
         val item = getItem(position)
         holder.bind(item)
+//        holder.itemView.setOnClickListener{
+//            onItemClick?.invoke(item)
+//        }
     }
 
     object DiffCallback: DiffUtil.ItemCallback<MenuPrincipalItem>() {

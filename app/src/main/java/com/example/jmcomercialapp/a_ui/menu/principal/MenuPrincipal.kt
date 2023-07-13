@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,7 +20,7 @@ class MenuPrincipal : Fragment() {
 
     private lateinit var binding: FragmentMenuPrincipalBinding
     private val viewModel: MenuViewModel by viewModels()
-
+    private lateinit var adapter: MenuPrincipalAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,25 +31,39 @@ class MenuPrincipal : Fragment() {
         binding.menu = this@MenuPrincipal
         binding.viewModel = viewModel
         viewModel.setGreeting(getString(R.string.saludo_menu, getGreeting(), "Usuario")) //Reemplazar con el nombre del usuario que inició sesión
-        binding.recyclerViewMenuPrincipal.adapter = MenuPrincipalAdapter()
+        adapter = MenuPrincipalAdapter()
+        binding.recyclerViewMenuPrincipal.adapter = adapter
+        adapter.onItemClick = {
+            Log.d("Main", "OnItemClick en ejecución con moduloId = ${it.id}")
+            goToFragment(it.id)
+        }
         return binding.root
     }
 
-    fun goToVentasArticulos(){
-        findNavController().navigate(R.id.action_menuPrincipal_to_listaVentaArticulosView)
-    }
-
-    fun goToPrestamos(){
-        findNavController().navigate(R.id.action_menuPrincipal_to_listaPrestamosView)
-    }
-
-    fun goToInventario(){
-        findNavController().navigate(R.id.action_menuPrincipal_to_listaInventarioView)
-    }
-
-    fun gotToClientes(){
-        Log.d("Main", "Ir a Clientes")
-        findNavController().navigate(R.id.action_menuPrincipal_to_listaClientesView)
+    fun goToFragment(moduloId: Int){
+        Log.d("Main", "Ejecutando goToFragment() con moduliId = $moduloId")
+        when(moduloId){
+            10 -> {
+                findNavController().navigate(R.id.action_menuPrincipal_to_listaVentaArticulosView)
+            }
+            20 -> {
+                findNavController().navigate(R.id.action_menuPrincipal_to_listaPrestamosView)
+            }
+            30 -> {
+                findNavController().navigate(R.id.action_menuPrincipal_to_listaInventarioView)
+            }
+            40 -> {
+                findNavController().navigate(R.id.action_menuPrincipal_to_listaClientesView)
+            }
+            50 -> {
+                Toast.makeText(requireContext(), "Pantalla no implementada", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            else -> {
+                Toast.makeText(requireContext(), "Pantalla no registrada", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 
     private fun getGreeting(): String {
