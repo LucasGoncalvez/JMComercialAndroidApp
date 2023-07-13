@@ -30,5 +30,10 @@
     <string name="caption_twitter">Twitter</string>
     <string name="caption_facebook">Facebook</string>
     <string name="title_menu_principal">Menú Principal</string>
+    <string name="saludo_menu">%s, %s!</string>
+    <string name="goodMorning">Buenos días</string>
+    <string name="goodAfternoon">Buenas tardes</string>
+    <string name="goodNight">Buenas noches</string>
+    <string name="alternative_greeting">Hola</string>
 
 </resources>
