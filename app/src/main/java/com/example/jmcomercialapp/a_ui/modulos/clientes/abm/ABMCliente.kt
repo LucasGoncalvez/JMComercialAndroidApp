@@ -7,12 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.example.jmcomercialapp.R
+import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
 import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ABMCliente : Fragment() {
 
     private lateinit var binding: FragmentAbmClienteBinding
+    private val viewModelUtils: UtilsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +24,7 @@ class ABMCliente : Fragment() {
     ): View {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
         binding = FragmentAbmClienteBinding.inflate(inflater, container, false)
+        binding.abmcliente = this@ABMCliente
         return binding.root
     }
 
@@ -29,26 +34,18 @@ class ABMCliente : Fragment() {
     }
 
     fun btnCiudadAction(){
-//        val inflater = LayoutInflater.from(requireContext())
-//        val popupView = inflater.inflate(R.layout.popup_cities, null)
-//
-//        val popupWindow = PopupWindow(
-//            popupView,
-//            WindowManager.LayoutParams.WRAP_CONTENT,
-//            WindowManager.LayoutParams.WRAP_CONTENT
-//        )
-//
-//        popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        popupWindow.showAtLocation(binding.btnSelectCity, Gravity.CENTER, 0, 0)
-//
-//        popupWindow.setOnDismissListener {
-//            //TODO: Perform any actions upon dismissal of the popup window
-//        }
-//
-//        val closeButton = popupView.findViewById<Button>(R.id.cancelSelectCityButton)
-//        closeButton.setOnClickListener{
-//            popupWindow.dismiss()
-//        }
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Elige una ciudad")
+            .setPositiveButton("Aceptar"){ dialog, which ->
+                showToast("$which")
+            }
+            .setNegativeButton("Cancelar"){ dialog, which ->
+                dialog.dismiss()
+            }
+            .setSingleChoiceItems(viewModelUtils.listaCiudades.value, 1) { dialog, which ->
+                showToast(viewModelUtils.listaCiudades.value!![which])
+            }
+            .show()
     }
 
     fun btnAddGeolocationAction(){

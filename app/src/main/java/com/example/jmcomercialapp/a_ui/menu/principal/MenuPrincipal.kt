@@ -67,21 +67,14 @@ class MenuPrincipal : Fragment() {
     }
 
     private fun getGreeting(): String {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val time = LocalTime.now().toString()
-            return when (time.subSequence(0, 2).toString().toInt()) {
-                in 0..11 -> {
-                    getString(R.string.goodMorning)
-                }
-                in 12..19 -> {
-                    getString(R.string.goodAfternoon)
-                }
-                else -> {
-                    getString(R.string.goodNight)
-                }
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            when (LocalTime.now().hour) {
+                in 0..11 -> getString(R.string.goodMorning)
+                in 12..19 -> getString(R.string.goodAfternoon)
+                else -> getString(R.string.goodNight)
             }
-        } else {
-            return getString(R.string.alternative_greeting)
+        } else{
+            getString(R.string.alternative_greeting)
         }
     }
 

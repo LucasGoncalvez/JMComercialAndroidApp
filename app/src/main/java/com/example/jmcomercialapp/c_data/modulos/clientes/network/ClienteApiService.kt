@@ -36,6 +36,8 @@ interface ClienteApiService{
 
     @GET("api/Persona/GetContacts?")
     suspend fun getClienteContactos(@Query("personaId") id: Int): MutableList<ClienteContactoDetail>
+
+
 }
 
 object ClienteApi{
