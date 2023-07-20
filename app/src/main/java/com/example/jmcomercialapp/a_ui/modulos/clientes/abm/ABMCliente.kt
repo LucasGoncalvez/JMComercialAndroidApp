@@ -1,22 +1,29 @@
 package com.example.jmcomercialapp.a_ui.modulos.clientes.abm
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
+import com.example.jmcomercialapp.b_viewmodel.login.LoginViewModel
 import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
 import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.time.LocalDateTime
 
 class ABMCliente : Fragment() {
 
     private lateinit var binding: FragmentAbmClienteBinding
     private val viewModelUtils: UtilsViewModel by viewModels()
+    private val viewModelLogin: LoginViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -56,8 +63,8 @@ class ABMCliente : Fragment() {
     }
 
     fun btnAddGeolocationAction(){
-        //showToast("Próximamente...")
-        showToast(viewModelUtils.status.value!!)
+        showToast("Próximamente...")
+        Log.d("Main", LocalDateTime.now().toString())
     }
 
     private fun showToast(msg: String){
@@ -71,5 +78,27 @@ class ABMCliente : Fragment() {
         else{
             return getString(R.string.caption_selected_empty)
         }
+    }
+
+    fun cancelar(){
+        MaterialAlertDialogBuilder(requireContext())
+            .setMessage(getString(R.string.message_cancel_abm))
+            .setPositiveButton(getString(R.string.btn_save)){_, _ ->
+                showToast("Guardar cliente")
+            }
+            .setNegativeButton(getString(R.string.btn_discard)){_, _ ->
+                findNavController().navigate(R.id.action_ABMCliente_to_listaClientesView)
+            }
+            .show()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    cancelar()
+                }
+            })
     }
 }

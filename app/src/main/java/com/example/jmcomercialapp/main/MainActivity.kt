@@ -19,7 +19,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return clickListenerBackUp() || super.onSupportNavigateUp()
+    }
+
+    private fun clickListenerBackUp(): Boolean{
+        onBackPressed()
+        return true
     }
 
 }

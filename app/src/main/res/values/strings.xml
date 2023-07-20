@@ -42,5 +42,8 @@
     <string name="btn_select_city">Ciudad</string>
     <string name="caption_put_email">Ingrese su correo electrónico</string>
     <string name="caption_put_phone">Ingrese su número de teléfono</string>
+    <string name="message_cancel_abm">Tus cambios no han sido guardados</string>
+    <string name="btn_discard">Descartar</string>
+    <string name="btn_save">Guardar</string>
 
 </resources>

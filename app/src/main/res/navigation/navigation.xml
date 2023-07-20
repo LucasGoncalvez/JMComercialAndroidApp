@@ -63,7 +63,13 @@
         android:id="@+id/ABMCliente"
         android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.ABMCliente"
         android:label="ABMCliente"
-        tools:layout="@layout/fragment_abm_cliente"/>
+        tools:layout="@layout/fragment_abm_cliente">
+        <action
+            android:id="@+id/action_ABMCliente_to_listaClientesView"
+            app:destination="@id/listaClientesView"
+            app:popUpTo="@id/listaClientesView"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentContainerCliente"
         android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentContainerCliente"
