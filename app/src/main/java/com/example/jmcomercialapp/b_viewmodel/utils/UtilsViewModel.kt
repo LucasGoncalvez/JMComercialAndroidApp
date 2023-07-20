@@ -42,7 +42,7 @@ class UtilsViewModel: ViewModel() {
 
     fun initCity(){
         //Si es que es para insercición, inicializar con id = -1, si es para modificación, poner la ciudad correspondiente
-        selectedCity.value = Ciudad(-1, -1, "(Ninguno)", null)
+        selectedCity.value = Ciudad(-1, -1, -1,"(Ninguno)", null)
     }
 
 }

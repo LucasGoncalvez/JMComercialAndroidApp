@@ -2,6 +2,8 @@ package com.example.jmcomercialapp.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.window.OnBackInvokedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun clickListenerBackUp(): Boolean{
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
