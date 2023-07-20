@@ -10,10 +10,10 @@
     <string name="textErrorConection">Verifique su conexión de red</string>
     <string name="textLoading">Cargando…</string>
     <string name="title_detalle_cliente">Información del cliente</string>
-    <string name="caption_name">Nombre:</string>
-    <string name="caption_last_name">Apellido:</string>
-    <string name="caption_city">Ciudad:</string>
-    <string name="caption_geolocation">Geolocalización:</string>
+    <string name="caption_name">Nombre</string>
+    <string name="caption_last_name">Apellido</string>
+    <string name="caption_city">Ciudad</string>
+    <string name="caption_geolocation">Geolocalización</string>
     <string name="caption_address">Dirección:</string>
     <string name="btn_registrar">Registrar</string>
     <string name="btn_cancelar">Cancelar</string>
@@ -35,5 +35,12 @@
     <string name="goodAfternoon">Buenas tardes</string>
     <string name="goodNight">Buenas noches</string>
     <string name="alternative_greeting">Hola</string>
+    <string name="caption_select_city_popup">Elige una ciudad</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="caption_selected_empty">(Ninguno)</string>
+    <string name="btn_geolocation">Geolocalización</string>
+    <string name="btn_select_city">Ciudad</string>
+    <string name="caption_put_email">Ingrese su correo electrónico</string>
+    <string name="caption_put_phone">Ingrese su número de teléfono</string>
 
 </resources>

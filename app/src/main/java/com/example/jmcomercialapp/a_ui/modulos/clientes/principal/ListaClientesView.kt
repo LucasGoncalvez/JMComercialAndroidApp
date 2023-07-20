@@ -9,12 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases.ListaClientesAdapter
-import com.example.jmcomercialapp.a_ui.modulos.clientes.principal.clases.ListaClientesDataSource
 import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.databinding.FragmentListaClientesViewBinding
 
@@ -42,6 +40,14 @@ class ListaClientesView : Fragment() {
 
     fun goToRegistrarCliente(){
         findNavController().navigate(R.id.action_listaClientesView_to_ABMCliente)
+//        val fragmentManager = parentFragmentManager
+//        val newFragment = ClienteABM()
+//        val transaction = fragmentManager.beginTransaction()
+//        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//        transaction
+//            .add(android.R.id.content, newFragment)
+//            .addToBackStack(null)
+//            .commit()
     }
 
     fun goToClienteDetalle(id: Int){

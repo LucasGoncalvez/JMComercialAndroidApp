@@ -17,6 +17,9 @@ class ABMCliente : Fragment() {
 
     private lateinit var binding: FragmentAbmClienteBinding
     private val viewModelUtils: UtilsViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,35 +28,48 @@ class ABMCliente : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
         binding = FragmentAbmClienteBinding.inflate(inflater, container, false)
         binding.abmcliente = this@ABMCliente
+        binding.viewModelUtils = viewModelUtils
+        binding.lifecycleOwner = viewLifecycleOwner
+        viewModelUtils.getCities()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //(activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
-    }
-
     fun btnCiudadAction(){
+        var selectedItem = -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
+        val listCities: Array<String> = viewModelUtils.listCities.value!!.map { it.denominacion }.toTypedArray()
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Elige una ciudad")
-            .setPositiveButton("Aceptar"){ dialog, which ->
-                showToast("$which")
+            .setTitle(getString(R.string.caption_select_city_popup))
+            .setPositiveButton(getString(R.string.btn_aceptar)){ _, _ ->
+                if(listCities.isNotEmpty() && selectedItem > -1){
+                    viewModelUtils.selectedCity.value = viewModelUtils.listCities.value!![selectedItem]
+                } else {
+                    viewModelUtils.initCity()
+                }
             }
-            .setNegativeButton("Cancelar"){ dialog, which ->
+            .setNegativeButton(getString(R.string.btn_cancelar)){ dialog, _ ->
                 dialog.dismiss()
             }
-            .setSingleChoiceItems(viewModelUtils.listaCiudades.value, 1) { dialog, which ->
-                showToast(viewModelUtils.listaCiudades.value!![which])
+            .setSingleChoiceItems(listCities, selectedItem) { _, which ->
+                selectedItem = which
             }
             .show()
     }
 
     fun btnAddGeolocationAction(){
-        showToast("Próximamente...")
+        //showToast("Próximamente...")
+        showToast(viewModelUtils.status.value!!)
     }
 
     private fun showToast(msg: String){
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
+    fun getCityName(): String{
+        if(viewModelUtils.selectedCity.value != null){
+            return viewModelUtils.selectedCity.value!!.denominacion
+        }
+        else{
+            return getString(R.string.caption_selected_empty)
+        }
+    }
 }
