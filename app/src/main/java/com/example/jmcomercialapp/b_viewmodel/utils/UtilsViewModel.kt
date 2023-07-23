@@ -1,14 +1,13 @@
 package com.example.jmcomercialapp.b_viewmodel.utils
 
-import android.content.Context
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
+import com.example.jmcomercialapp.c_data.utils.clases.TipoDocumento
+import com.example.jmcomercialapp.c_data.utils.clases.TipoDocumentoDataSource
 import com.example.jmcomercialapp.c_data.utils.network.UtilsApi
 import kotlinx.coroutines.launch
 
@@ -18,15 +17,25 @@ class UtilsViewModel: ViewModel() {
     val listCities: LiveData<Array<Ciudad>>
         get() = _listCities
 
+    private val _listDocTypes = MutableLiveData<Array<TipoDocumento>>(arrayOf())
+    val listDocTypes: LiveData<Array<TipoDocumento>>
+        get() = _listDocTypes
+
     var selectedCity = MutableLiveData<Ciudad>()
 
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String>
-        get() = _status
+    var selectedDocType = MutableLiveData<TipoDocumento>()
+
+    private val _statusCities = MutableLiveData<String>()
+    val statusCities: LiveData<String>
+        get() = _statusCities
+
+    private val _statusDocTypes = MutableLiveData<String>()
+    val statusDocTypes: LiveData<String>
+        get() = _statusDocTypes
 
     init {
         initCity()
-        _status.value = "Inicializado"
+        initDocType()
     }
 
     fun getCities(){
@@ -38,7 +47,19 @@ class UtilsViewModel: ViewModel() {
             catch (e: Exception){
                 Log.d("Main", e.message.toString())
                 _listCities.value = arrayOf()
-                _status.value = e.message
+            }
+        }
+    }
+
+    fun getDocTypes(){
+        viewModelScope.launch {
+            try{
+                val result = TipoDocumentoDataSource().load()
+                _listDocTypes.value = result
+            }
+            catch (e: Exception){
+                Log.d("Main", e.message.toString())
+                _listDocTypes.value = arrayOf()
             }
         }
     }
@@ -46,6 +67,10 @@ class UtilsViewModel: ViewModel() {
     fun initCity(){
         //Si es que es para insercición, inicializar con id = -1, si es para modificación, poner la ciudad correspondiente
         selectedCity.value = Ciudad(-1, -1, -1,"(Ninguno)"/*Resources.getSystem().getString(R.string.caption_selected_empty)*/, null)
+    }
+
+    fun initDocType(){
+        selectedDocType.value = TipoDocumento(-1, "(Ninguno)", true)
     }
 
 }

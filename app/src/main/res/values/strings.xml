@@ -48,5 +48,8 @@
     <string name="caption_direccion">Dirección</string>
     <string name="data_required">Valor requerido</string>
     <string name="city_required">Debes indicar su ciudad</string>
+    <string name="btn_select_doc_type">Tipo de documento</string>
+    <string name="caption_select_doc_popup">Elige un Tipo de Documento</string>
+    <string name="caption_doc_type">Número Documento</string>
 
 </resources>

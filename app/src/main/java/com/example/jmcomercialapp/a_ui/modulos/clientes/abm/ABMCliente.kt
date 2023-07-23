@@ -39,10 +39,35 @@ class ABMCliente : Fragment() {
         binding.viewModelUtils = viewModelUtils
         binding.lifecycleOwner = viewLifecycleOwner
         viewModelUtils.getCities()
+        viewModelUtils.getDocTypes()
         return binding.root
     }
 
-    fun btnCiudadAction() {
+    fun btnTipoDoc() {
+        var selectedItem =
+            -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
+        val listDocType: Array<String> =
+            viewModelUtils.listDocTypes.value!!.map { it.denominacion }.toTypedArray()
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.caption_select_doc_popup))
+            .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
+                if (listDocType.isNotEmpty() && selectedItem > -1) {
+                    viewModelUtils.selectedDocType.value =
+                        viewModelUtils.listDocTypes.value!![selectedItem] //Al ordenar, el id ya no será selectedItem
+                } else {
+                    viewModelUtils.initDocType()
+                }
+            }
+            .setNegativeButton(getString(R.string.btn_cancelar)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setSingleChoiceItems(listDocType, selectedItem) { _, which ->
+                selectedItem = which
+            }
+            .show()
+    }
+
+    fun btnCiudad() {
         var selectedItem =
             -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
         val listCities: Array<String> =
@@ -81,8 +106,8 @@ class ABMCliente : Fragment() {
                 id = 0,
                 nombre = inputNombreValue.text.toString(),
                 apellido = inputApellidoValue.text.toString().trim().ifEmpty { null },
-                tipoDocumentoId = null,
-                numeroDocumento = null,
+                tipoDocumentoId = viewModelUtils?.selectedDocType?.value!!.id,
+                numeroDocumento = inputNumDocValue.text.toString().trim().ifEmpty { null },
                 paisId = viewModelUtils?.selectedCity?.value!!.paisId,
                 departamentoId = viewModelUtils?.selectedCity?.value!!.departamentoId,
                 ciudadId = viewModelUtils?.selectedCity?.value!!.id,
@@ -100,16 +125,16 @@ class ABMCliente : Fragment() {
     }
 
     fun validarCampos(): Boolean {
-            if(binding.inputNombreValue.text.toString().trim().isEmpty()){
-                setErrorTextField(true)
-                return false
-            } else{
-                setErrorTextField(false)
-            }
-            if (viewModelUtils.selectedCity.value!!.id == -1){
-                showToast(getString(R.string.city_required))
-                return false
-            }
+        if (binding.inputNombreValue.text.toString().trim().isEmpty()) {
+            setErrorTextField(true)
+            return false
+        } else {
+            setErrorTextField(false)
+        }
+        if (viewModelUtils.selectedCity.value!!.id == -1) {
+            showToast(getString(R.string.city_required))
+            return false
+        }
 
         return true
     }
