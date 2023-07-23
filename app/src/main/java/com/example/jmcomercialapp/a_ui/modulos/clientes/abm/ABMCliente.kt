@@ -1,5 +1,6 @@
 package com.example.jmcomercialapp.a_ui.modulos.clientes.abm
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.b_viewmodel.login.LoginViewModel
 import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
 import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.time.LocalDateTime
@@ -24,15 +26,14 @@ class ABMCliente : Fragment() {
     private lateinit var binding: FragmentAbmClienteBinding
     private val viewModelUtils: UtilsViewModel by viewModels()
     private val viewModelLogin: LoginViewModel by activityViewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    lateinit var cliente: Cliente
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.lista_clientes_fragment)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.lista_clientes_fragment)
         binding = FragmentAbmClienteBinding.inflate(inflater, container, false)
         binding.abmcliente = this@ABMCliente
         binding.viewModelUtils = viewModelUtils
@@ -41,19 +42,22 @@ class ABMCliente : Fragment() {
         return binding.root
     }
 
-    fun btnCiudadAction(){
-        var selectedItem = -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
-        val listCities: Array<String> = viewModelUtils.listCities.value!!.map { it.denominacion }.toTypedArray()
+    fun btnCiudadAction() {
+        var selectedItem =
+            -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
+        val listCities: Array<String> =
+            viewModelUtils.listCities.value!!.map { it.denominacion }.toTypedArray()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.caption_select_city_popup))
-            .setPositiveButton(getString(R.string.btn_aceptar)){ _, _ ->
-                if(listCities.isNotEmpty() && selectedItem > -1){
-                    viewModelUtils.selectedCity.value = viewModelUtils.listCities.value!![selectedItem]
+            .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
+                if (listCities.isNotEmpty() && selectedItem > -1) {
+                    viewModelUtils.selectedCity.value =
+                        viewModelUtils.listCities.value!![selectedItem]
                 } else {
                     viewModelUtils.initCity()
                 }
             }
-            .setNegativeButton(getString(R.string.btn_cancelar)){ dialog, _ ->
+            .setNegativeButton(getString(R.string.btn_cancelar)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setSingleChoiceItems(listCities, selectedItem) { _, which ->
@@ -62,31 +66,63 @@ class ABMCliente : Fragment() {
             .show()
     }
 
-    fun btnAddGeolocationAction(){
+    fun btnAddGeolocationAction() {
         showToast("Próximamente...")
-        Log.d("Main", LocalDateTime.now().toString())
     }
 
-    private fun showToast(msg: String){
+    private fun showToast(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
-    fun getCityName(): String{
-        if(viewModelUtils.selectedCity.value != null){
-            return viewModelUtils.selectedCity.value!!.denominacion
+    fun registrarCliente() {
+        if (!validarCampos()) return
+        binding.apply {
+            cliente = Cliente(
+                id = 0,
+                nombre = inputNombreValue.text.toString(),
+                apellido = inputApellidoValue.text.toString().trim().ifEmpty { null },
+                tipoDocumentoId = null,
+                numeroDocumento = null,
+                paisId = viewModelUtils?.selectedCity?.value!!.paisId,
+                departamentoId = viewModelUtils?.selectedCity?.value!!.departamentoId,
+                ciudadId = viewModelUtils?.selectedCity?.value!!.id,
+                zonaBarrioId = null,
+                direccion = inputDireccionValue.text.toString().trim().ifEmpty { null },
+                geolocalizacion = null,
+                loginIdAlta = if (viewModelLogin.currentUser.value != null) viewModelLogin.currentUser.value!!.id else null,
+                fechaAlta = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) LocalDateTime.now() else null, //TODO Verificar como recuperar la fecha y hora para versiones inferiores
+                loginIdUltMod = null,
+                fechaUltMod = null,
+                habilitado = true
+            )
         }
-        else{
-            return getString(R.string.caption_selected_empty)
-        }
+        Log.d("Main", "Datos del cliente: $cliente")
     }
 
-    fun cancelar(){
+    fun validarCampos(): Boolean {
+        var result = true
+        binding.apply {
+            when {
+                inputNombreValue.text.isNullOrEmpty() -> {
+                    //Resaltar el campo Nombre
+                    result = false
+                }
+                viewModelUtils?.selectedCity?.value!!.id == -1 -> {
+                    //Resaltar que se debe seleccionar una ciudad
+                    result = false
+                }
+            }
+        }
+        return result
+    }
+
+    fun cancelar() {
         MaterialAlertDialogBuilder(requireContext())
             .setMessage(getString(R.string.message_cancel_abm))
-            .setPositiveButton(getString(R.string.btn_save)){_, _ ->
+            .setPositiveButton(getString(R.string.btn_save)) { _, _ ->
                 showToast("Guardar cliente")
             }
-            .setNegativeButton(getString(R.string.btn_discard)){_, _ ->
+            .setNegativeButton(getString(R.string.btn_discard)) { _, _ ->
                 findNavController().navigate(R.id.action_ABMCliente_to_listaClientesView)
             }
             .show()
@@ -95,7 +131,7 @@ class ABMCliente : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true){
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     cancelar()
                 }

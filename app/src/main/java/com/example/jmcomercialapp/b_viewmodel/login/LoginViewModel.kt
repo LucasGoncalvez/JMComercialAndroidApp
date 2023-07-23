@@ -7,7 +7,7 @@ import com.example.jmcomercialapp.c_data.login.clases.UserDetail
 
 class LoginViewModel: ViewModel() {
 
-    private val _currentUser = MutableLiveData<UserDetail>()
+    private val _currentUser = MutableLiveData<UserDetail>(UserDetail(null, null))
     val currentUser: LiveData<UserDetail>
         get() = _currentUser
 
