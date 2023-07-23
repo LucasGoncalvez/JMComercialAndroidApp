@@ -52,7 +52,7 @@ class ABMCliente : Fragment() {
             .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
                 if (listCities.isNotEmpty() && selectedItem > -1) {
                     viewModelUtils.selectedCity.value =
-                        viewModelUtils.listCities.value!![selectedItem]
+                        viewModelUtils.listCities.value!![selectedItem] //Al ordenar, el id ya no será selectedItem
                 } else {
                     viewModelUtils.initCity()
                 }
@@ -100,20 +100,28 @@ class ABMCliente : Fragment() {
     }
 
     fun validarCampos(): Boolean {
-        var result = true
-        binding.apply {
-            when {
-                inputNombreValue.text.isNullOrEmpty() -> {
-                    //Resaltar el campo Nombre
-                    result = false
-                }
-                viewModelUtils?.selectedCity?.value!!.id == -1 -> {
-                    //Resaltar que se debe seleccionar una ciudad
-                    result = false
-                }
+            if(binding.inputNombreValue.text.toString().trim().isEmpty()){
+                setErrorTextField(true)
+                return false
+            } else{
+                setErrorTextField(false)
             }
+            if (viewModelUtils.selectedCity.value!!.id == -1){
+                showToast(getString(R.string.city_required))
+                return false
+            }
+
+        return true
+    }
+
+    fun setErrorTextField(error: Boolean) {
+        if (error) {
+            binding.inputNombre.error = getString(R.string.data_required)
+            binding.inputNombre.isErrorEnabled = true
+        } else {
+            binding.inputNombre.error = null
+            binding.inputNombre.isErrorEnabled = false
         }
-        return result
     }
 
     fun cancelar() {

@@ -1,10 +1,13 @@
 package com.example.jmcomercialapp.b_viewmodel.utils
 
+import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
 import com.example.jmcomercialapp.c_data.utils.network.UtilsApi
 import kotlinx.coroutines.launch
@@ -42,7 +45,7 @@ class UtilsViewModel: ViewModel() {
 
     fun initCity(){
         //Si es que es para insercición, inicializar con id = -1, si es para modificación, poner la ciudad correspondiente
-        selectedCity.value = Ciudad(-1, -1, -1,"(Ninguno)", null)
+        selectedCity.value = Ciudad(-1, -1, -1,"(Ninguno)"/*Resources.getSystem().getString(R.string.caption_selected_empty)*/, null)
     }
 
 }

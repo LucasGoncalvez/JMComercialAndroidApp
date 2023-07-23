@@ -55,13 +55,17 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="4dp"
-                                android:layout_weight="1">
+                                android:layout_weight="1"
+                                app:errorIconDrawable="@drawable/ic_error"
+                                app:helperTextTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                                >
 
                                 <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/inputNombreValue"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/caption_name"
+                                    android:inputType="textPersonName|textNoSuggestions"
                                     android:imeOptions="actionNext"
                                     android:maxLines="1" />
                             </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +101,8 @@
                                 android:layout_marginTop="16dp"
                                 android:text="@string/btn_select_city"
                                 android:onClick="@{() -> abmcliente.btnCiudadAction()}"
-                                app:icon="@drawable/ic_add_24dp" />
+                                app:icon="@drawable/ic_add_24dp"
+                                />
 
                             <TextView
                                 android:id="@+id/tv_selected_city"
