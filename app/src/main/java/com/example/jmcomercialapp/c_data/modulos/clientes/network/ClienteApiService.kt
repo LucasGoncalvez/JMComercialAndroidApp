@@ -1,5 +1,6 @@
 package com.example.jmcomercialapp.c_data.modulos.clientes.network
 
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClienteDetail
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClientePreviewData
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.clientecontacto.ClienteContactoDetail
@@ -9,7 +10,9 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 
@@ -37,6 +40,8 @@ interface ClienteApiService{
     @GET("api/Persona/GetContacts?")
     suspend fun getClienteContactos(@Query("personaId") id: Int): MutableList<ClienteContactoDetail>
 
+    @POST("api/Persona/Add")
+    suspend fun addCliente(@Body cliente: Cliente): Int
 
 }
 

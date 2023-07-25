@@ -1,7 +1,6 @@
 package com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente
 
 import com.squareup.moshi.Json
-import java.time.LocalDateTime
 
 data class Cliente(
     @Json(name="id") val id: Int,
@@ -16,8 +15,8 @@ data class Cliente(
     @Json(name="direccion") val direccion: String?,
     @Json(name="geolocalizacion") val geolocalizacion: String?,
     @Json(name="loginIdAlta") val loginIdAlta: Int?,
-    @Json(name="fechaAlta") val fechaAlta: LocalDateTime?,
+    @Json(name="fechaAlta") val fechaAlta: String?,
     @Json(name="loginIdUltMod") val loginIdUltMod: Int?,
-    @Json(name="fechaUltMod") val fechaUltMod: LocalDateTime?,
+    @Json(name="fechaUltMod") val fechaUltMod: String?,
     @Json(name="habilitado") val habilitado: Boolean
 )

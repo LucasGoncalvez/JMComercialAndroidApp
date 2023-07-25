@@ -82,7 +82,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="@string/caption_last_name"
-                                    android:imeOptions="actionDone"
+                                    android:inputType="textPersonName|textNoSuggestions"
+                                    android:imeOptions="actionNext"
                                     android:maxLines="1" />
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,6 +129,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/caption_doc_type"
+                                android:inputType="numberSigned|textNoSuggestions"
                                 android:maxLines="1" />
                         </com.google.android.material.textfield.TextInputLayout>
 

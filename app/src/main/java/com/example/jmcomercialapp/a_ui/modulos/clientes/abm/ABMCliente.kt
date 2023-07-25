@@ -1,6 +1,5 @@
 package com.example.jmcomercialapp.a_ui.modulos.clientes.abm
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,15 +14,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.b_viewmodel.login.LoginViewModel
+import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
 import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.time.LocalDateTime
 
 class ABMCliente : Fragment() {
 
     private lateinit var binding: FragmentAbmClienteBinding
+    private val viewModel: ClienteViewModel by viewModels()
     private val viewModelUtils: UtilsViewModel by viewModels()
     private val viewModelLogin: LoginViewModel by activityViewModels()
     lateinit var cliente: Cliente
@@ -106,7 +106,7 @@ class ABMCliente : Fragment() {
                 id = 0,
                 nombre = inputNombreValue.text.toString(),
                 apellido = inputApellidoValue.text.toString().trim().ifEmpty { null },
-                tipoDocumentoId = viewModelUtils?.selectedDocType?.value!!.id,
+                tipoDocumentoId = if(viewModelUtils?.selectedDocType?.value!!.id > -1) viewModelUtils?.selectedDocType?.value!!.id else null,
                 numeroDocumento = inputNumDocValue.text.toString().trim().ifEmpty { null },
                 paisId = viewModelUtils?.selectedCity?.value!!.paisId,
                 departamentoId = viewModelUtils?.selectedCity?.value!!.departamentoId,
@@ -115,13 +115,14 @@ class ABMCliente : Fragment() {
                 direccion = inputDireccionValue.text.toString().trim().ifEmpty { null },
                 geolocalizacion = null,
                 loginIdAlta = if (viewModelLogin.currentUser.value != null) viewModelLogin.currentUser.value!!.id else null,
-                fechaAlta = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) LocalDateTime.now() else null, //TODO Verificar como recuperar la fecha y hora para versiones inferiores
+                fechaAlta = null,
                 loginIdUltMod = null,
                 fechaUltMod = null,
                 habilitado = true
             )
         }
         Log.d("Main", "Datos del cliente: $cliente")
+        viewModel.registrarCliente(cliente)
     }
 
     fun validarCampos(): Boolean {

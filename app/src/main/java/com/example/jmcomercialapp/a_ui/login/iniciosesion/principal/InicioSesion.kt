@@ -29,7 +29,7 @@ class InicioSesion : Fragment() {
     }
 
     fun goToMenuPrincipal(){
-        viewModel.setCurrentUser(UserDetail(6, "lgoncalvez"))
+        viewModel.setCurrentUser(UserDetail(1, "lucas"))
         findNavController().navigate(R.id.action_inicioSesion_to_menuPrincipal)
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
 import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClienteApi
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClienteDetail
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClientePreviewData
@@ -12,17 +13,22 @@ import com.example.jmcomercialapp.c_data.modulos.clientes.clases.clientecontacto
 import com.example.jmcomercialapp.d_utils.MainStatuses
 import kotlinx.coroutines.launch
 
-class ClienteViewModel: ViewModel() {
+class ClienteViewModel : ViewModel() {
 
     private val _status = MutableLiveData<MainStatuses>()
     val status: LiveData<MainStatuses>
         get() = _status
 
+    private val _statusAction = MutableLiveData<MainStatuses>() //Para cuando se agrega o modifica un cliente
+    val statusAction: LiveData<MainStatuses>
+        get() = _statusAction
+
     private val _listaClientes = MutableLiveData<MutableList<ClientePreviewData>>()
     val listaClientes: LiveData<MutableList<ClientePreviewData>>
         get() = _listaClientes
 
-    val _idClienteActual = MutableLiveData<Int?>(null)  //Acá se aloja el id del cliente que se seleccionará en el RecyclerView de Clientes
+    val _idClienteActual =
+        MutableLiveData<Int?>(null)  //Acá se aloja el id del cliente que se seleccionará en el RecyclerView de Clientes
 
     private val _cliente = MutableLiveData<ClienteDetail?>()
     val cliente: LiveData<ClienteDetail?>
@@ -36,31 +42,29 @@ class ClienteViewModel: ViewModel() {
     val listaContactos: LiveData<MutableList<ClienteContactoDetail>>
         get() = _listaContactos
 
-    fun getClientesPreview(){
+    fun getClientesPreview() {
         viewModelScope.launch {
             _status.value = MainStatuses.LOADING
-            try{
+            try {
                 val result = ClienteApi.retrofitService.getClientesPreview()
                 _listaClientes.value = result
                 _status.value = MainStatuses.DONE
 
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 _listaClientes.value = mutableListOf()
                 _status.value = MainStatuses.ERROR
             }
         }
     }
 
-    fun getClienteDetail(id: Int){
+    fun getClienteDetail(id: Int) {
         viewModelScope.launch {
             _status.value = MainStatuses.LOADING
-            try{
+            try {
                 val result = ClienteApi.retrofitService.getClienteDetail(id)
                 _cliente.value = result
                 _status.value = MainStatuses.DONE
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 _cliente.value = null
                 Log.d("Main", e.message.toString())
                 _status.value = MainStatuses.ERROR
@@ -68,18 +72,31 @@ class ClienteViewModel: ViewModel() {
         }
     }
 
-    fun getClienteContactos(personaId: Int){
+    fun getClienteContactos(personaId: Int) {
         viewModelScope.launch {
             _statusContactos.value = MainStatuses.LOADING
-            try{
+            try {
                 val result = ClienteApi.retrofitService.getClienteContactos(personaId)
                 _listaContactos.value = result
                 _statusContactos.value = MainStatuses.DONE
-            }
-            catch (e: Exception){
+            } catch (e: Exception) {
                 _listaContactos.value = mutableListOf()
                 _statusContactos.value = MainStatuses.ERROR
                 Log.d("Main", e.message.toString())
+            }
+        }
+    }
+
+    fun registrarCliente(cliente: Cliente) {
+        _statusAction.value = MainStatuses.LOADING
+        viewModelScope.launch {
+            try {
+                val result = ClienteApi.retrofitService.addCliente(cliente)
+                Log.d("Main", "Id del nuevo cliente: $result")
+                _statusAction.value = MainStatuses.DONE
+            } catch (e: Exception) {
+                Log.e("Main", e.message.toString())
+                _statusAction.value = MainStatuses.ERROR
             }
         }
     }

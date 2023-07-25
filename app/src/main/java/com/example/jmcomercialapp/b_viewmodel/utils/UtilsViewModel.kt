@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
 import com.example.jmcomercialapp.c_data.utils.clases.TipoDocumento
-import com.example.jmcomercialapp.c_data.utils.clases.TipoDocumentoDataSource
 import com.example.jmcomercialapp.c_data.utils.network.UtilsApi
 import kotlinx.coroutines.launch
 
@@ -54,7 +53,7 @@ class UtilsViewModel: ViewModel() {
     fun getDocTypes(){
         viewModelScope.launch {
             try{
-                val result = TipoDocumentoDataSource().load()
+                val result = UtilsApi.retrofitService.getTiposDocumentos()
                 _listDocTypes.value = result
             }
             catch (e: Exception){
@@ -70,7 +69,7 @@ class UtilsViewModel: ViewModel() {
     }
 
     fun initDocType(){
-        selectedDocType.value = TipoDocumento(-1, "(Ninguno)", true)
+        selectedDocType.value = TipoDocumento(-1, "(Ninguno)", null,true)
     }
 
 }

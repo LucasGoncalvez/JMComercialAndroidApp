@@ -1,12 +1,12 @@
 package com.example.jmcomercialapp.c_data.utils.network
 
 import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
+import com.example.jmcomercialapp.c_data.utils.clases.TipoDocumento
 import com.example.jmcomercialapp.d_utils.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 
 private val moshi = Moshi.Builder()
@@ -22,6 +22,9 @@ private val retrofit = Retrofit.Builder()
 interface UtilsApiService{
     @GET("api/Ubicacion/GetCiudades")
     suspend fun getCities(): Array<Ciudad>
+
+    @GET("api/Documento/GetAll")
+    suspend fun getTiposDocumentos(): Array<TipoDocumento>
 }
 
 object UtilsApi{
