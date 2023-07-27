@@ -51,5 +51,6 @@
     <string name="btn_select_doc_type">Tipo de documento</string>
     <string name="caption_select_doc_popup">Elige un Tipo de Documento</string>
     <string name="caption_doc_type">Número Documento</string>
+    <string name="btn_stay_here">Quedarme</string>
 
 </resources>

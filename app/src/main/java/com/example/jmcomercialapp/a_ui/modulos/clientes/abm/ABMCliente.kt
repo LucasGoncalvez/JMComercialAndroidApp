@@ -1,6 +1,8 @@
 package com.example.jmcomercialapp.a_ui.modulos.clientes.abm
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,8 @@ import com.example.jmcomercialapp.b_viewmodel.login.LoginViewModel
 import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
+import com.example.jmcomercialapp.d_utils.LOG_TAG
+import com.example.jmcomercialapp.d_utils.MainStatuses
 import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -151,19 +155,38 @@ class ABMCliente : Fragment() {
     }
 
     fun cancelar() {
-        MaterialAlertDialogBuilder(requireContext())
-            .setMessage(getString(R.string.message_cancel_abm))
-            .setPositiveButton(getString(R.string.btn_save)) { _, _ ->
-                showToast("Guardar cliente")
-            }
-            .setNegativeButton(getString(R.string.btn_discard)) { _, _ ->
-                findNavController().navigate(R.id.action_ABMCliente_to_listaClientesView)
-            }
-            .show()
+        if(viewModel.statusAction.value != MainStatuses.DONE){
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage(getString(R.string.message_cancel_abm))
+                .setPositiveButton(getString(R.string.btn_stay_here)) { _, _ ->
+                    //Sin acción para quedarme en la misma pantalla
+                }
+                .setNegativeButton(getString(R.string.btn_discard)) { _, _ ->
+                    findNavController().navigate(R.id.action_ABMCliente_to_listaClientesView)
+                }
+                .show()
+        } else{
+            findNavController().navigate(R.id.action_ABMCliente_to_listaClientesView)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.inputNombreValue.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                Log.d(LOG_TAG, s.toString())
+                setErrorTextField(false)
+            }
+
+        })
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
