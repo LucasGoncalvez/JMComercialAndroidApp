@@ -39,7 +39,7 @@ class ListaClientesView : Fragment() {
     }
 
     fun goToRegistrarCliente(){
-        findNavController().navigate(R.id.action_listaClientesView_to_ABMCliente)
+        findNavController().navigate(R.id.action_listaClientesView_to_AddCliente)
 //        val fragmentManager = parentFragmentManager
 //        val newFragment = ClienteABM()
 //        val transaction = fragmentManager.beginTransaction()

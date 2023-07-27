@@ -38,8 +38,8 @@
         android:label="fragment_lista_clientes_view"
         tools:layout="@layout/fragment_lista_clientes_view" >
         <action
-            android:id="@+id/action_listaClientesView_to_ABMCliente"
-            app:destination="@id/ABMCliente" />
+            android:id="@+id/action_listaClientesView_to_AddCliente"
+            app:destination="@id/AddCliente" />
         <action
             android:id="@+id/action_listaClientesView_to_fragmentContainerCliente"
             app:destination="@id/fragmentContainerCliente" />
@@ -60,10 +60,10 @@
         android:label="fragment_lista_venta_articulos_view"
         tools:layout="@layout/fragment_lista_venta_articulos_view" />
     <fragment
-        android:id="@+id/ABMCliente"
-        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.ABMCliente"
+        android:id="@+id/AddCliente"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.AddCliente"
         android:label="ABMCliente"
-        tools:layout="@layout/fragment_abm_cliente">
+        tools:layout="@layout/fragment_add_cliente">
         <action
             android:id="@+id/action_ABMCliente_to_listaClientesView"
             app:destination="@id/listaClientesView"
@@ -74,12 +74,24 @@
         android:id="@+id/fragmentContainerCliente"
         android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.FragmentContainerCliente"
         android:label="fragment_container_cliente"
-        tools:layout="@layout/fragment_container_cliente" >
-        <action
-            android:id="@+id/action_fragmentContainerCliente_to_ABMCliente"
-            app:destination="@id/ABMCliente" />
+        tools:layout="@layout/fragment_cliente_detalle" >
         <argument
             android:name="clienteId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentContainerCliente_to_updateCliente"
+            app:destination="@id/updateCliente" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCliente"
+        android:name="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.UpdateCliente"
+        android:label="UpdateCliente"
+        tools:layout="@layout/fragment_update_cliente">
+        <argument android:name="cliente" />
+        <action
+            android:id="@+id/action_updateCliente_to_fragmentContainerCliente"
+            app:destination="@id/fragmentContainerCliente"
+            app:popUpTo="@id/fragmentContainerCliente"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

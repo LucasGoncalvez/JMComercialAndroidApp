@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.a_ui.modulos.clientes.viewdetail.clases.ClienteContactoAdapter
 import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.databinding.FragmentClienteDetalleBinding
@@ -14,7 +16,7 @@ import com.example.jmcomercialapp.databinding.FragmentClienteDetalleBinding
 class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
 
     private lateinit var binding: FragmentClienteDetalleBinding
-    private val viewModel: ClienteViewModel by viewModels()
+    private val viewModel: ClienteViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
 
     fun modificarCliente(){
         Log.d("Main", "${viewModel.listaContactos.value?.size}")
-        //findNavController().navigate(R.id.action_fragmentContainerCliente_to_ABMCliente)
+        findNavController().navigate(R.id.action_fragmentContainerCliente_to_updateCliente)
     }
 
 }

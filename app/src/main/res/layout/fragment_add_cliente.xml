@@ -9,7 +9,7 @@
             type="com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel" />
         <variable
             name="abmcliente"
-            type="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.ABMCliente" />
+            type="com.example.jmcomercialapp.a_ui.modulos.clientes.abm.AddCliente" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/big_title_main"
-            android:text="@string/title_abm_cliente"
+            android:text="@string/title_add_cliente"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"

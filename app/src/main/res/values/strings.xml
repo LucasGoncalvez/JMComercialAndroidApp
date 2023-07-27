@@ -17,7 +17,7 @@
     <string name="caption_address">Dirección:</string>
     <string name="btn_registrar">Registrar</string>
     <string name="btn_cancelar">Cancelar</string>
-    <string name="title_abm_cliente">Registrar nuevo cliente</string>
+    <string name="title_add_cliente">Registrar nuevo cliente</string>
     <string name="welcome_app">Bienvenido a \nJM Comercial App</string>
     <string name="login_title">Inicio de sesión</string>
     <string name="btn_forgot_password">Olvide mi contraseña</string>
@@ -52,5 +52,9 @@
     <string name="caption_select_doc_popup">Elige un Tipo de Documento</string>
     <string name="caption_doc_type">Número Documento</string>
     <string name="btn_stay_here">Quedarme</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_update">Modificar</string>
+    <string name="title_update_cliente">Modificar cliente</string>
 
 </resources>

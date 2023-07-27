@@ -21,12 +21,12 @@ import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
 import com.example.jmcomercialapp.d_utils.LOG_TAG
 import com.example.jmcomercialapp.d_utils.MainStatuses
-import com.example.jmcomercialapp.databinding.FragmentAbmClienteBinding
+import com.example.jmcomercialapp.databinding.FragmentAddClienteBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class ABMCliente : Fragment() {
+class AddCliente : Fragment() {
 
-    private lateinit var binding: FragmentAbmClienteBinding
+    private lateinit var binding: FragmentAddClienteBinding
     private val viewModel: ClienteViewModel by viewModels()
     private val viewModelUtils: UtilsViewModel by viewModels()
     private val viewModelLogin: LoginViewModel by activityViewModels()
@@ -38,8 +38,8 @@ class ABMCliente : Fragment() {
     ): View {
         (activity as AppCompatActivity).supportActionBar?.title =
             getString(R.string.lista_clientes_fragment)
-        binding = FragmentAbmClienteBinding.inflate(inflater, container, false)
-        binding.abmcliente = this@ABMCliente
+        binding = FragmentAddClienteBinding.inflate(inflater, container, false)
+        binding.abmcliente = this@AddCliente
         binding.viewModelUtils = viewModelUtils
         binding.lifecycleOwner = viewLifecycleOwner
         viewModelUtils.getCities()
