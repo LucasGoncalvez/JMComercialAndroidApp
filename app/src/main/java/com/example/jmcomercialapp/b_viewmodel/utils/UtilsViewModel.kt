@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
 import com.example.jmcomercialapp.c_data.utils.clases.TipoDocumento
 import com.example.jmcomercialapp.c_data.utils.network.UtilsApi
+import com.example.jmcomercialapp.d_utils.LOG_TAG
 import kotlinx.coroutines.launch
 
 class UtilsViewModel: ViewModel() {
@@ -37,11 +38,19 @@ class UtilsViewModel: ViewModel() {
         initDocType()
     }
 
-    fun getCities(){
+    fun getCities(ciudadId: Int){
+        /*Recibe -1 cuando se va registrar al cliente, porque no tiene aun asignada ninguna ciudad
+        Recibe el id de la ciudad actual del cliente cuando se va modificar los datos de un cliente,
+        porque ya tiene asignada una ciudad*/
         viewModelScope.launch {
             try{
                 val result = UtilsApi.retrofitService.getCities()
+                result.sortBy { it.denominacion }
                 _listCities.value = result
+                if(ciudadId > -1){
+                    val currentCity = listCities.value?.filter { it.id == ciudadId }!!.first()
+                    selectedCity.value = currentCity
+                }
             }
             catch (e: Exception){
                 Log.d("Main", e.message.toString())

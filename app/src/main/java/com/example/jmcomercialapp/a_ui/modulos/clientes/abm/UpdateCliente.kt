@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
 import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
+import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
 import com.example.jmcomercialapp.d_utils.LOG_TAG
 import com.example.jmcomercialapp.d_utils.MainStatuses
 import com.example.jmcomercialapp.databinding.FragmentUpdateClienteBinding
@@ -29,7 +30,7 @@ class UpdateCliente : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModelUtils.getDocTypes()
-        viewModelUtils.getCities()
+        viewModelUtils.getCities(viewModel.cliente.value?.ciudadId!!)
     }
 
     override fun onCreateView(
@@ -69,8 +70,12 @@ class UpdateCliente : Fragment() {
     }
 
     fun btnCiudad(){
-        var selectedItem =
-            -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
+        //Se recupera la ciudad actual a la que pertenece el cliente
+        var selectedItem = if(viewModelUtils.listCities.value?.size!! > 0){
+            viewModelUtils.listCities.value?.indexOf(viewModelUtils.selectedCity.value)!!
+        } else {
+            -1
+        }
         val listCities: Array<String> =
             viewModelUtils.listCities.value!!.map { it.denominacion }.toTypedArray()
         MaterialAlertDialogBuilder(requireContext())

@@ -42,7 +42,7 @@ class AddCliente : Fragment() {
         binding.abmcliente = this@AddCliente
         binding.viewModelUtils = viewModelUtils
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModelUtils.getCities()
+        viewModelUtils.getCities(-1)
         viewModelUtils.getDocTypes()
         return binding.root
     }
