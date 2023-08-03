@@ -43,7 +43,7 @@ class AddCliente : Fragment() {
         binding.viewModelUtils = viewModelUtils
         binding.lifecycleOwner = viewLifecycleOwner
         viewModelUtils.getCities(-1)
-        viewModelUtils.getDocTypes()
+        viewModelUtils.getDocTypes(-1)
         return binding.root
     }
 

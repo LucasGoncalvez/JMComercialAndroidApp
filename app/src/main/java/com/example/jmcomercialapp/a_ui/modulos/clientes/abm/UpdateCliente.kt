@@ -29,7 +29,7 @@ class UpdateCliente : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModelUtils.getDocTypes()
+        viewModelUtils.getDocTypes(viewModel.cliente.value?.tipoDocumentoId)
         viewModelUtils.getCities(viewModel.cliente.value?.ciudadId!!)
     }
 
@@ -46,14 +46,18 @@ class UpdateCliente : Fragment() {
     }
 
     fun btnTipoDoc(){
-        var selectedItem =
-            -1 //Posición seleccionada (-1 indica que ninguna de las opciones estará seleccionada)
-        val listDocType: Array<String> =
+        //Se recupera la ciudad actual a la que pertenece el cliente
+        var selectedItem = if(viewModelUtils.listDocTypes.value?.size!! > 0){
+            viewModelUtils.listDocTypes.value?.indexOf(viewModelUtils.selectedDocType.value)!!
+        } else {
+            -1
+        }
+        val listCities: Array<String> =
             viewModelUtils.listDocTypes.value!!.map { it.denominacion }.toTypedArray()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.caption_select_doc_popup))
             .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
-                if (listDocType.isNotEmpty() && selectedItem > -1) {
+                if (listCities.isNotEmpty() && selectedItem > -1) {
                     viewModelUtils.selectedDocType.value =
                         viewModelUtils.listDocTypes.value!![selectedItem] //Al ordenar, el id ya no será selectedItem
                 } else {
@@ -63,7 +67,7 @@ class UpdateCliente : Fragment() {
             .setNegativeButton(getString(R.string.btn_cancelar)) { dialog, _ ->
                 dialog.dismiss()
             }
-            .setSingleChoiceItems(listDocType, selectedItem) { _, which ->
+            .setSingleChoiceItems(listCities, selectedItem) { _, which ->
                 selectedItem = which
             }
             .show()

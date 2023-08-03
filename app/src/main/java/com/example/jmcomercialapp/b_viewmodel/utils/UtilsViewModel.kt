@@ -47,7 +47,7 @@ class UtilsViewModel: ViewModel() {
                 val result = UtilsApi.retrofitService.getCities()
                 result.sortBy { it.denominacion }
                 _listCities.value = result
-                if(ciudadId > -1){
+                if(ciudadId > -1 && listCities.value?.size!! > 0){
                     val currentCity = listCities.value?.filter { it.id == ciudadId }!!.first()
                     selectedCity.value = currentCity
                 }
@@ -59,11 +59,22 @@ class UtilsViewModel: ViewModel() {
         }
     }
 
-    fun getDocTypes(){
+    fun getDocTypes(docTypeId: Int?){
+        /*Recibe -1 cuando se va registrar al cliente, porque no tiene aun asignado ningún tipo
+        tipo de documento.
+        Recibe el id del tipo de documento actual del cliente cuando se va modificar los datos
+        de un cliente si es que ya tiene asignado un tipo de documento*/
         viewModelScope.launch {
             try{
                 val result = UtilsApi.retrofitService.getTiposDocumentos()
+                result.sortedBy { it.denominacion }
                 _listDocTypes.value = result
+                if (docTypeId != null) {
+                    if(docTypeId > -1 && listDocTypes.value?.size!! > 0){
+                        val currentDocType = listDocTypes.value?.filter { it.id == docTypeId }!!.first()
+                        selectedDocType.value = currentDocType
+                    }
+                }
             }
             catch (e: Exception){
                 Log.d("Main", e.message.toString())
