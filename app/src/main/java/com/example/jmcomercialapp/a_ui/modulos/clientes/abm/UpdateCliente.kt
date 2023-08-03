@@ -41,6 +41,7 @@ class UpdateCliente : Fragment() {
         Log.d(LOG_TAG, "Id en UpdateCliente: ${viewModel.cliente.value?.id}")
         binding.updatecliente = this@UpdateCliente
         binding.viewModelUtils = viewModelUtils
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -137,5 +138,6 @@ class UpdateCliente : Fragment() {
                     cancelar()
                 }
             })
+        viewModel.cliente.value?.nombre?.let { Log.d(LOG_TAG, it) }
     }
 }

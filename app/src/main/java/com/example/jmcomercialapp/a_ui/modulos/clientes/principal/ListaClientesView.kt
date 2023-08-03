@@ -52,8 +52,8 @@ class ListaClientesView : Fragment() {
 
     fun goToClienteDetalle(id: Int){
         Log.d("Main", "Se carga el id: $id")
-        viewModel._idClienteActual.value = id
-        val bundle = bundleOf("clienteId" to viewModel._idClienteActual.value)
+        viewModel.idClienteActual.value = id
+        val bundle = bundleOf("clienteId" to viewModel.idClienteActual.value)
         findNavController().navigate(R.id.action_listaClientesView_to_fragmentContainerCliente, bundle)
     }
 

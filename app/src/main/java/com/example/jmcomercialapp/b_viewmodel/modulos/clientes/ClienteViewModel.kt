@@ -27,7 +27,7 @@ class ClienteViewModel : ViewModel() {
     val listaClientes: LiveData<MutableList<ClientePreviewData>>
         get() = _listaClientes
 
-    val _idClienteActual =
+    val idClienteActual =
         MutableLiveData<Int?>(null)  //Acá se aloja el id del cliente que se seleccionará en el RecyclerView de Clientes
 
     private val _cliente = MutableLiveData<ClienteDetail?>()

@@ -20,8 +20,8 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel._idClienteActual.value = clienteId
-        Log.d("Main", "Id del cliente en onCreate(): ${viewModel._idClienteActual.value}")
+        viewModel.idClienteActual.value = clienteId
+        Log.d("Main", "Id del cliente en onCreate(): ${viewModel.idClienteActual.value}")
         viewModel.getClienteDetail(clienteId)
         viewModel.getClienteContactos(clienteId)
     }
@@ -35,7 +35,7 @@ class FragmentClienteDetalle(private val clienteId: Int) : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         binding.rvListaContactos.adapter = ClienteContactoAdapter()
-        Log.d("Main", "Id del cliente en onCreateView(): ${viewModel._idClienteActual.value}")
+        Log.d("Main", "Id del cliente en onCreateView(): ${viewModel.idClienteActual.value}")
         return binding.root
     }
 
