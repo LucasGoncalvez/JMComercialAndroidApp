@@ -140,11 +140,10 @@ class AddCliente : Fragment() {
             showToast(getString(R.string.city_required))
             return false
         }
-
         return true
     }
 
-    fun setErrorTextField(error: Boolean) {
+    private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.inputNombre.error = getString(R.string.data_required)
             binding.inputNombre.isErrorEnabled = true

@@ -10,6 +10,7 @@ import com.example.jmcomercialapp.c_data.modulos.clientes.network.ClienteApi
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClienteDetail
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.ClientePreviewData
 import com.example.jmcomercialapp.c_data.modulos.clientes.clases.clientecontacto.ClienteContactoDetail
+import com.example.jmcomercialapp.d_utils.LOG_TAG
 import com.example.jmcomercialapp.d_utils.MainStatuses
 import kotlinx.coroutines.launch
 
@@ -53,6 +54,7 @@ class ClienteViewModel : ViewModel() {
             } catch (e: Exception) {
                 _listaClientes.value = mutableListOf()
                 _status.value = MainStatuses.ERROR
+                Log.e(LOG_TAG, e.message.toString())
             }
         }
     }
@@ -66,7 +68,7 @@ class ClienteViewModel : ViewModel() {
                 _status.value = MainStatuses.DONE
             } catch (e: Exception) {
                 _cliente.value = null
-                Log.d("Main", e.message.toString())
+                Log.e(LOG_TAG, e.message.toString())
                 _status.value = MainStatuses.ERROR
             }
         }
@@ -82,7 +84,7 @@ class ClienteViewModel : ViewModel() {
             } catch (e: Exception) {
                 _listaContactos.value = mutableListOf()
                 _statusContactos.value = MainStatuses.ERROR
-                Log.d("Main", e.message.toString())
+                Log.e(LOG_TAG, e.message.toString())
             }
         }
     }
@@ -95,7 +97,21 @@ class ClienteViewModel : ViewModel() {
                 Log.d("Main", "Id del nuevo cliente: $result")
                 _statusAction.value = MainStatuses.DONE
             } catch (e: Exception) {
-                Log.e("Main", e.message.toString())
+                Log.e(LOG_TAG, e.message.toString())
+                _statusAction.value = MainStatuses.ERROR
+            }
+        }
+    }
+
+    fun updateCliente(cliente: Cliente){
+        _statusAction.value = MainStatuses.LOADING
+        viewModelScope.launch {
+            try {
+                val result = ClienteApi.retrofitService.updateCliente(cliente)
+                Log.d(LOG_TAG, "Cantidad de registros modificados: $result")
+                _statusAction.value = MainStatuses.DONE
+            } catch (e: Exception) {
+                Log.e(LOG_TAG, e.message.toString())
                 _statusAction.value = MainStatuses.ERROR
             }
         }

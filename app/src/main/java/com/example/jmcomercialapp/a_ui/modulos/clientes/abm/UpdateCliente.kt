@@ -13,9 +13,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.jmcomercialapp.R
+import com.example.jmcomercialapp.b_viewmodel.login.LoginViewModel
 import com.example.jmcomercialapp.b_viewmodel.modulos.clientes.ClienteViewModel
 import com.example.jmcomercialapp.b_viewmodel.utils.UtilsViewModel
-import com.example.jmcomercialapp.c_data.utils.clases.Ciudad
+import com.example.jmcomercialapp.c_data.modulos.clientes.clases.cliente.Cliente
 import com.example.jmcomercialapp.d_utils.LOG_TAG
 import com.example.jmcomercialapp.d_utils.MainStatuses
 import com.example.jmcomercialapp.databinding.FragmentUpdateClienteBinding
@@ -26,6 +27,8 @@ class UpdateCliente : Fragment() {
     private lateinit var binding: FragmentUpdateClienteBinding
     private val viewModel: ClienteViewModel by activityViewModels()
     private val viewModelUtils: UtilsViewModel by viewModels()
+    private val viewModelLogin: LoginViewModel by activityViewModels()
+    lateinit var cliente: Cliente
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,7 +126,53 @@ class UpdateCliente : Fragment() {
     }
 
     fun updateCliente(){
+        if (!validarCampos()) return
+        binding.apply {
+            cliente = Cliente(
+                id = viewModel?.cliente?.value?.id?:0,
+                nombre = inputNombreValue.text.toString(),
+                apellido = inputApellidoValue.text.toString().trim().ifEmpty { null },
+                tipoDocumentoId = if(viewModelUtils?.selectedDocType?.value!!.id > -1) viewModelUtils?.selectedDocType?.value!!.id else null,
+                numeroDocumento = inputNumDocValue.text.toString().trim().ifEmpty { null },
+                paisId = viewModelUtils?.selectedCity?.value!!.paisId,
+                departamentoId = viewModelUtils?.selectedCity?.value!!.departamentoId,
+                ciudadId = viewModelUtils?.selectedCity?.value!!.id,
+                zonaBarrioId = null,
+                direccion = inputDireccionValue.text.toString().trim().ifEmpty { null },
+                geolocalizacion = null,
+                loginIdAlta = if(viewModel?.cliente?.value != null) viewModel?.cliente?.value?.loginIdAlta else null,
+                fechaAlta = null,
+                loginIdUltMod = if (viewModelLogin.currentUser.value != null) viewModelLogin.currentUser.value!!.id else null,
+                fechaUltMod = null,
+                habilitado = true
+            )
+        }
+        Log.d("Main", "Datos del cliente a modificar: $cliente")
+        viewModel.updateCliente(cliente)
+    }
 
+    fun validarCampos(): Boolean {
+        if (binding.inputNombreValue.text.toString().trim().isEmpty()) {
+            setErrorTextField(true)
+            return false
+        } else {
+            setErrorTextField(false)
+        }
+        if (viewModelUtils.selectedCity.value!!.id == -1) {
+            showToast(getString(R.string.city_required))
+            return false
+        }
+        return true
+    }
+
+    private fun setErrorTextField(error: Boolean) {
+        if (error) {
+            binding.inputNombre.error = getString(R.string.data_required)
+            binding.inputNombre.isErrorEnabled = true
+        } else {
+            binding.inputNombre.error = null
+            binding.inputNombre.isErrorEnabled = false
+        }
     }
 
     private fun showToast(msg: String) {

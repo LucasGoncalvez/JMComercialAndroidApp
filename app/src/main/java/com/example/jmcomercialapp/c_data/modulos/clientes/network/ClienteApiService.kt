@@ -43,6 +43,9 @@ interface ClienteApiService{
     @POST("api/Persona/Add")
     suspend fun addCliente(@Body cliente: Cliente): Int
 
+    @POST("api/Persona/Update")
+    suspend fun updateCliente(@Body cliente: Cliente): Int
+
 }
 
 object ClienteApi{
