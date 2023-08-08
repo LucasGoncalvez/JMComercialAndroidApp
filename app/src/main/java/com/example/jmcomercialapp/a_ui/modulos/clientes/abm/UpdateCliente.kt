@@ -147,8 +147,9 @@ class UpdateCliente : Fragment() {
                 habilitado = true
             )
         }
-        Log.d("Main", "Datos del cliente a modificar: $cliente")
+        Log.d(LOG_TAG, "Datos del cliente a modificar: $cliente")
         viewModel.updateCliente(cliente)
+        Log.d(LOG_TAG, viewModel.statusAction.value!!.name)
     }
 
     fun validarCampos(): Boolean {

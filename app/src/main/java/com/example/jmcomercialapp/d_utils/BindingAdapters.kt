@@ -64,3 +64,11 @@ fun bindViewVisibility(view: View, status: MainStatuses?){
 fun bindSetImageFromId(imageView: ImageView, imageId: Int){
     imageView.setImageResource(imageId)
 }
+
+@BindingAdapter("viewEnabled")
+fun bindViewEnabled(view: View, status: MainStatuses?){
+    view.isEnabled = when (status){
+        MainStatuses.LOADING -> { false }
+        else -> { true }
+    }
+}

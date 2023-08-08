@@ -7,6 +7,8 @@ import com.example.jmcomercialapp.c_data.modulos.clientes.clases.clientecontacto
 import com.example.jmcomercialapp.d_utils.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -44,7 +46,7 @@ interface ClienteApiService{
     suspend fun addCliente(@Body cliente: Cliente): Int
 
     @POST("api/Persona/Update")
-    suspend fun updateCliente(@Body cliente: Cliente): Int
+    suspend fun updateCliente(@Body cliente: Cliente): Response<Int>
 
 }
 

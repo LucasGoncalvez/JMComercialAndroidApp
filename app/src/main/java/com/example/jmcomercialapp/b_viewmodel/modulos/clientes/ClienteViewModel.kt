@@ -43,6 +43,10 @@ class ClienteViewModel : ViewModel() {
     val listaContactos: LiveData<MutableList<ClienteContactoDetail>>
         get() = _listaContactos
 
+    init {
+        Log.d(LOG_TAG, "init en ClienteViewModel")
+    }
+
     fun getClientesPreview() {
         viewModelScope.launch {
             _status.value = MainStatuses.LOADING
@@ -108,7 +112,9 @@ class ClienteViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = ClienteApi.retrofitService.updateCliente(cliente)
-                Log.d(LOG_TAG, "Cantidad de registros modificados: $result")
+                Log.d(LOG_TAG, "Cantidad de registros modificados: ${result.body()}")
+                Log.d(LOG_TAG, "Código retornado: ${result.code()}")
+                result.isSuccessful
                 _statusAction.value = MainStatuses.DONE
             } catch (e: Exception) {
                 Log.e(LOG_TAG, e.message.toString())
